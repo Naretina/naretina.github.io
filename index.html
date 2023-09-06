@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<style>
 	.scatter {
-		width: 500 px;
-		height: 500 px;
+		width: 500px;
+		height: 500px;
 	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
@@ -15,7 +15,9 @@
 	<div id="scatterplot_1" class="scatter">
 		<script>
 			async function App() {
-
+				// load the data
+				const data = await d3.json("C:\Users\Morgan Eads\source\repos\Naretina\naretina.github.io\GlobalTemperatures.json")
+				console.log(data);
 			}
 			App();
 		</script>
