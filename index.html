@@ -16,13 +16,38 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
+			// Extract data
+			const LATData = data.map(d => +d.LAT);
+			console.log(LATData);
 
+			// Define svg dimensions and margins
+			const svgWidth = 500;
+			const svgHeight = 500;
+			const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+
+			// Calculate the chart dimensions
+            const chartWidth = svgWidth - margin.left - margin.right;
+            const chartHeight = svgHeight - margin.top - margin.bottom;
+
+            // Access the SVG element
+            const svg = document.getElementById("scatterplot_1");
+			svg.setAttribute("width", svgWidth);
+            svg.setAttribute("height", svgHeight);
+
+			// Create a group for the chart
+            const Group1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            Group1.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+            svg.appendChild(Group1);
+
+            // Calculate the maximum value for scaling the y-axis
+            const maxLAT = Math.max(...LATData);
 		}
 
 		// Fetch data using jQuery
         $(document).ready(function() {
-            $.getJSON("iris.json")
+            $.getJSON("GlobalTemperatures.json")
                 .done(function(data) {
+					console.log(data);
                     // Call the function to draw the bar chart
                     drawScatter(data);
                 })
