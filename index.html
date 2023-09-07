@@ -20,7 +20,6 @@
 		function drawScatter(data) {
 			// Retrieving x (time) & y (LAT) values
 			const xData = data.map(d => d.time);
-			console.log(typeof xData[0]);
 			const yData = data.map(d => +d.LAT);
 			// Retrieving the size (LATU) of the data points, which I still don't know how to use.
 			const sizeData = data.map(d => +d.LATU);
