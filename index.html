@@ -8,18 +8,16 @@
 		height: 500px;
 	}
 	</style>
-	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>Scatterplots</title>
 </head>
 <body>
 	<div id="scatterplot_1" class="scatter">
 		<script>
-			async function App() {
-				// load the data
-				const data = await d3.csv("GlobalTemperaturesUpdated.csv")
-				console.log(data);
-			}
-			App();
+			console.log(JSON.parse("GlobalTemperatures.json"))
+		</script>
+	</div>
+	<div id="scatterplot_2" class="scatter">
+		<script>
 		</script>
 	</div>
 </body>
