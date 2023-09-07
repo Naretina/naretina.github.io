@@ -11,32 +11,33 @@
 	}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<title>Scatterplots</title>
 </head>
 <body>
-	<div id="scatterplot_1" class="scatter"></div>
-	<div id="scatterplot_2" class="scatter"></div>
+	<canvas id="scatterplot_1" class="scatter"></canvas>
+	<canvas id="scatterplot_2" class="scatter"></canvas>
 	<script>
 		function drawScatter(data) {
 			// Retrieving x (time) & y (LAT) values
 			const xData = data.map(d => d.time);
+			console.log(typeof xData[0]);
 			const yData = data.map(d => +d.LAT);
-			// Retrieving the size (LATU) of the data points
+			// Retrieving the size (LATU) of the data points, which I still don't know how to use.
 			const sizeData = data.map(d => +d.LATU);
 
-			const trace = {
-				x: xData,
-				y: yData,
-				mode: 'markers',
-				marker: {size: sizeData}
-			};
+			const canvas = document.getElementById("scatterplot_1");
+			const ctx = canvas.getContext("2d");
+			canvas.height = canvas.width;
+			ctx.transform(1, 0, 0, -1, 0, canvas.height);
 
-			const layout = {
-				title: "Plotting Bubbles"
-			};
-
-			Plotly.newPlot('scatterplot_1', trace, layout);
+			ctx.fillStyle = "black";
+			for (let i = 0; i < yData.length-1; i++) {
+				let x = xData[i]*500/1992;
+				let y = yData[i]*500/Math.max(yData);
+				ctx.beginPath();
+				ctx.ellipse(x, y, 3, 3, 0, 0, Math.PI * 2);
+				ctx.fill();
+			}
 		}
 
 		// Fetch data using jQuery
