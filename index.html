@@ -9,15 +9,27 @@
 		height: 500px;
 	}
 	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Scatterplots</title>
 </head>
 <body>
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
-		fetch("GlobalTemperatures.json")
-				.then((response) => response.json())
-				.then((json) => console.log(json));
-		console.log(json[0]);
+		function drawScatter(data) {
+
+		}
+
+		// Fetch data using jQuery
+        $(document).ready(function() {
+            $.getJSON("iris.json")
+                .done(function(data) {
+                    // Call the function to draw the bar chart
+                    drawScatter(data);
+                })
+                .fail(function(error) {
+                    console.error("Error loading JSON file:", error);
+                });
+        });
 	</script>
 </body>
 </html>
