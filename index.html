@@ -21,7 +21,7 @@
 		function drawScatter(data) {
 			// Retrieving x (time) & y (LAT) values
 			const xData = data.map(d => d.time);
-			console.log(xData);
+			console.log(typeof xData);
 			const yData = data.map(d => +d.LAT);
 			console.log(yData);
 
