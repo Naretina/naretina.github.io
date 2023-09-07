@@ -57,7 +57,7 @@
 					var points = svg
 						.append('g')
 						.selectAll('dot')
-						.data(gt)
+						.data(data)
 						.join('circle')
 						.attr('cx', function(d, i) {
 							return x(+d.LAT);
