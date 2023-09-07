@@ -19,7 +19,13 @@
 	<svg id="scatterplot_2" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
-			
+			// Retrieving x (time) & y (LAT) values
+			const xData = data.map(d => d.time);
+			console.log(xData);
+			const yData = data.map(d => +d.LAT);
+			console.log(yData);
+
+			// This one is for part 3: const LATUData = data.map(d => +d.LATU);
 		}
 
 		// Fetch data using jQuery
