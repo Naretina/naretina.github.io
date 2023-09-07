@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<style>
 	.scatter {
 		width: 500px;
@@ -17,12 +16,6 @@
 			fetch("GlobalTemperatures.json")
 				.then((response) => response.json())
 				.then((json) => console.log(json));
-			const data = [{
-				x: json.time,
-				y: json.LAT,
-				mode: "markers"
-			}];
-			}
 		</script>
 	</div>
 	<div id="scatterplot_2" class="scatter">
