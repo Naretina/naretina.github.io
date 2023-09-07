@@ -14,8 +14,7 @@
 	<title>Scatterplots</title>
 </head>
 <body>
-	<canvas id="scatterplot_1" class="scatter"></canvas>
-	<canvas id="scatterplot_2" class="scatter"></canvas>
+	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
 			// Retrieving x (time) & y (LAT) values
@@ -25,27 +24,12 @@
 			const sizeData = data.map(d => +d.LATU);
 
 			const canvas = document.getElementById("scatterplot_1");
-			const ctx = canvas.getContext("2d");
-			ctx.transform(1, 0, 0, -1, 0, 500);
-
-			ctx.fillStyle = "black";
 			for (let i = 0; i < xData.length-1; i++) {
-				let x = xData[i]*500/arrayMax(xData);
-				let y = yData[i]*500/arrayMax(yData);
-				ctx.beginPath();
-				ctx.ellipse(x, y, 3, 3, 0, 0, Math.PI * 2);
-				ctx.fill();
-			}
-
-			function arrayMax(arr) {
-				let len = arr.length;
-				let max = -Infinity;
-				while (len--) {
-					if (arr[len] > max) {
-					  max = arr[len];
-					}
-				}
-				return max;
+				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+				circle.setAttribute("cx", xData[i]);
+				circle.setAttribute("cy", yData[i]);
+				circle.setAttribute("r", sizeData[i]);
+				canvas.appendChild(circle);
 			}
 		}
 
