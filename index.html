@@ -15,18 +15,9 @@
 </head>
 <body>
 	<svg id="scatterplot_1" class="scatter"></svg>
+	<svg id="scatterplot_2" class="scatter"></svg>
 	<script>
-		function drawScatter(data) {
-			// Retrieving x (time) & y (LAT) values for Visualization 1
-			const xData = data.map(d => d.time);
-			const y1Data = data.map(d => +d.LAT);
-			// Retrieving the size (LATU) of the data points for Visualization 1
-			const sizeData = data.map(d => +d.LATU);
-
-			// Retrieving the y (LOAT) values and size (LOATU) for Visualization 3
-			const y2Data = data.map(d => +d.LOAT);
-			const size2Data = data.map(d => +d.LOATU);
-
+		function drawAxes(id) {
 			//Establishing dimensions and margins
 			const margin = {
 				top: 20,
@@ -36,7 +27,7 @@
 			};
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
-			const canvas = document.getElementById("scatterplot_1");
+			const canvas = document.getElementById(id);
 
 			// Creating a group for the scatterplot
 			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
@@ -61,6 +52,23 @@
 				yAxis.setAttribute("stroke", "black");
 				pointGroup.appendChild(yAxis);
 
+			return pointGroup;
+		}
+
+		function drawScatter(data) {
+			// Retrieving x (time) & y (LAT) values for Visualization 1
+			const xData = data.map(d => d.time);
+			const y1Data = data.map(d => +d.LAT);
+			// Retrieving the size (LATU) of the data points for Visualization 1
+			const sizeData = data.map(d => +d.LATU);
+
+			// Retrieving the y (LOAT) values and size (LOATU) for Visualization 3
+			const y2Data = data.map(d => +d.LOAT);
+			const size2Data = data.map(d => +d.LOATU);
+
+			// Establishing the boundaries and axes of the graph
+			const pointGroup = drawAxes("scatterplot_1");
+
 			// Drawing plot points for Visualization 3 (part of Visualization 1)
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
@@ -71,7 +79,7 @@
 					canvasHeight - (y2Data[i] - Math.min(...y2Data)) /
 					(Math.max(...y2Data) - Math.min(...y2Data)) * canvasHeight);
 				circle.setAttribute("r", size2Data[i] * 3.5);
-				circle.setAttribute("fill", "royalblue"); // I want to use royalblue for part 3
+				circle.setAttribute("fill", "royalblue");
 				circle.setAttribute("stroke", "navy");
 				pointGroup.appendChild(circle);
 			}
@@ -86,19 +94,25 @@
 					canvasHeight - (y1Data[i] - Math.min(...y1Data)) /
 					(Math.max(...y1Data) - Math.min(...y1Data)) * canvasHeight);
 				circle.setAttribute("r", sizeData[i] * 3.5);
-				circle.setAttribute("fill", "peachpuff"); // I want to use royalblue for part 3
+				circle.setAttribute("fill", "peachpuff");
 				circle.setAttribute("stroke", "orangered");
 				pointGroup.appendChild(circle);
 			}
+		}
+
+		function drawEllipse(data) {
+			// Establishing the boundaries and axes of the graph
+			const pointGroup = drawAxes("scatterplot_2");
 		}
 
 		// Fetch data using jQuery
         $(document).ready(function() {
             $.getJSON("GlobalTemperatures.json")
                 .done(function(data) {
-					console.log(data);
-                    // Call the function to draw the bar chart
+                    // Call the function to draw Visualizations 1 & 3
                     drawScatter(data);
+					// Call the function to draw Visualization 2
+					drawEllipse(data);
                 })
                 .fail(function(error) {
                     console.error("Error loading JSON file:", error);
