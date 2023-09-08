@@ -43,7 +43,7 @@
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
 				circle.setAttribute("cx",
 					(xData[i] - Math.min(...xData)) /
-					(Math.max(...xData) - Math.min(...xData)) * chartWidth);
+					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
 				circle.setAttribute("cy",
 					canvasHeight - (yData[i] - Math.min(...yData)) /
 					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
