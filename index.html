@@ -81,16 +81,24 @@
 			// Drawing plot points for Visualization 1
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-				circle.setAttribute("cx",
-					(xData[i] - Math.min(...xData)) /
-					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
-				circle.setAttribute("cy",
-					canvasHeight - (y1Data[i] - Math.min(...y1Data)) /
-					(Math.max(...y1Data) - Math.min(...y1Data)) * canvasHeight);
-				circle.setAttribute("r", sizeData[i] * 3.5);
-				circle.setAttribute("fill", "peachpuff");
-				circle.setAttribute("stroke", "orangered");
+					circle.setAttribute("cx",
+						(xData[i] - Math.min(...xData)) /
+						(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+					circle.setAttribute("cy",
+						canvasHeight - (y1Data[i] - Math.min(...y1Data)) /
+						(Math.max(...y1Data) - Math.min(...y1Data)) * canvasHeight);
+					circle.setAttribute("r", sizeData[i] * 3.5);
+					circle.setAttribute("fill", "peachpuff");
+					circle.setAttribute("stroke", "orangered");
 				point1Group.appendChild(circle);
+
+				var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+					text.setAttribute("x", xData[i] - Math.min(...xData)) /
+						(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+					text.setAttribute("y", canvasHeight + 20);
+					text.setAttribute("transform", "rotate(90 0,0)");
+					label.textContext = xData[i];
+				point1Group.appendChild(text);
 			}
 
 			// Creating separate group for points from Visualization 3
