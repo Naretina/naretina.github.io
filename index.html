@@ -47,7 +47,7 @@
 				circle.setAttribute("cy",
 					canvasHeight - (yData[i] - Math.min(...yData)) /
 					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
-				circle.setAttribute("r", sizeData[i]);
+				circle.setAttribute("r", sizeData[i] * 3);
 				pointGroup.appendChild(circle);
 			}
 		}
