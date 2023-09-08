@@ -50,9 +50,10 @@
 			xLabelGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(xLabelGroup);
 			if (id == "scatterplot_1") {
+				var year = 1850;
 				for (let i = 0; i < data.length-1; i++) {
 					var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-						text.setAttribute()
+						text.setAttribute("x", );
 					point1Group.appendChild(text);
 				}
 			} else {
@@ -84,7 +85,7 @@
 			label(data, margin, canvasWidth, canvasHeight, "scatterplot_1");
 
 			// Creating separate group for points from Visualization 1
-			const canvas = document.getElementById(id);
+			const canvas = document.getElementById("scatterplot_1");
 			const point1Group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			point1Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(point1Group);
@@ -144,7 +145,7 @@
 			label(data, margin, canvasWidth, canvasHeight, "scatterplot_2");
 
 			// Creating separate group for points
-			const canvas = document.getElementById(id);
+			const canvas = document.getElementById("scatterplot_2");
 			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(pointGroup);
