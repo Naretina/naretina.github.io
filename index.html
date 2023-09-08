@@ -17,12 +17,12 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<svg id="scatterplot_2" class="scatter"></svg>
 	<script>
-		function drawAxes(left, top, width, height, id) {
+		function drawAxes(margin, width, height, id) {
 			// Creating a group for the scatterplot
 			const canvas = document.getElementById(id);
-			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
-			pointGroup.setAttribute("transform", "translate(" + left + "," + top + ")");
-			canvas.appendChild(pointGroup);
+			const axesGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			axesGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(axesGroup);
 
 			// Creating the x-axis
 			const xAxis = document.createElementNS("http://www.w3.org/2000/svg", 'line');
@@ -31,7 +31,7 @@
 				xAxis.setAttribute("x2", width);
 				xAxis.setAttribute("y2", height);
 				xAxis.setAttribute("stroke", "black");
-				pointGroup.appendChild(xAxis);
+				axesGroup.appendChild(xAxis);
 
 			// Creating the y-axis
 			const yAxis = document.createElementNS("http://www.w3.org/2000/svg", 'line');
@@ -40,9 +40,19 @@
 				yAxis.setAttribute("x2", 0);
 				yAxis.setAttribute("y2", height);
 				yAxis.setAttribute("stroke", "black");
-				pointGroup.appendChild(yAxis);
+				axesGroup.appendChild(yAxis);
+		}
 
-			return pointGroup;
+		function label(margin, width, height, id) {
+			const canvas = document.getElementById(id);
+			const xLabelGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			xLabelGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(xLabelGroup);
+			if (id == "scatterplot_1") {
+				
+			} else {
+
+			}
 		}
 
 		function drawViz13(data) {
@@ -56,7 +66,7 @@
 			const y2Data = data.map(d => +d.LOAT);
 			const size2Data = data.map(d => +d.LOATU);
 
-			// Establishing the dimensions, margins, and axes of the graph
+			// Establishing the dimensions, margins, axes, and labels of the graph
 			const margin = {
 				top: 20,
 				right: 20,
@@ -65,9 +75,14 @@
 			};
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
-			const pointGroup = drawAxes(margin.left, margin.top,
-											canvasWidth, canvasHeight, "scatterplot_1");
+			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_1");
+			label(margin, canvasWidth, canvasHeight, "scatterplot_1");
 
+			// Creating separate group for points from Visualization 1
+			const canvas = document.getElementById(id);
+			const point1Group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			point1Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(point1Group);
 			// Drawing plot points for Visualization 1
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
@@ -80,9 +95,14 @@
 				circle.setAttribute("r", sizeData[i] * 3.5);
 				circle.setAttribute("fill", "peachpuff");
 				circle.setAttribute("stroke", "orangered");
-				pointGroup.appendChild(circle);
+				point1Group.appendChild(circle);
 			}
 
+			// Creating separate group for points from Visualization 3
+			const canvas = document.getElementById(id);
+			const point2Group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			point2Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(point2Group);
 			// Drawing plot points for Visualization 3 (part of Visualization 1)
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
@@ -95,7 +115,7 @@
 				circle.setAttribute("r", size2Data[i] * 3.5);
 				circle.setAttribute("fill", "royalblue");
 				circle.setAttribute("stroke", "navy");
-				pointGroup.appendChild(circle);
+				point2Group.appendChild(circle);
 			}
 		}
 
@@ -107,7 +127,7 @@
 			const majorData = data.map(d => +d.LATU);
 			const minorData = data.map(d => +d.LOATU);
 
-			// Establishing the dimensions, margins, and axes of the graph
+			// Establishing the dimensions, margins, axes, and labels of the graph
 			const margin = {
 				top: 20,
 				right: 20,
@@ -116,9 +136,14 @@
 			};
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
-			const pointGroup = drawAxes(margin.left, margin.top,
-											canvasWidth, canvasHeight, "scatterplot_2");
+			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_2");
+			label(margin, canvasWidth, canvasHeight, "scatterplot_2");
 
+			// Creating separate group for points
+			const canvas = document.getElementById(id);
+			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(pointGroup);
 			// Drawing plot points
 			for (let i = 0; i < xData.length-1; i++) {
 				var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
