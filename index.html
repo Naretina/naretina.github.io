@@ -54,14 +54,6 @@
 			const y2Data = data.map(d => +d.LOAT);
 			const size2Data = data.map(d => +d.LOATU);
 
-			// To be deleted, but I want to get a good understanding of how to interval
-			console.log(Math.min(...xData));
-			console.log(Math.max(...xData));
-			console.log(Math.min(...y1Data));
-			console.log(Math.max(...y1Data));
-			console.log(Math.min(...y2Data));
-			console.log(Math.max(...y2Data));
-
 			// Establishing the dimensions, margins, axes, and labels of the graph
 			const margin = {
 				top: 20,
@@ -79,7 +71,7 @@
 			point1Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(point1Group);
 			// Drawing plot points for Visualization 1
-			for (let i = 0; i < /*xData.length-*/1; i++) {
+			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
 					circle.setAttribute("cx",
 						(xData[i] - Math.min(...xData)) /
@@ -91,12 +83,6 @@
 					circle.setAttribute("fill", "peachpuff");
 					circle.setAttribute("stroke", "orangered");
 				point1Group.appendChild(circle);
-
-				var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-					text.setAttribute("x", canvasWidth);
-					text.setAttribute("y", canvasWidth);
-					text.textContext = xData[i];
-				point1Group.appendChild(text);
 			}
 
 			// Creating separate group for points from Visualization 3
