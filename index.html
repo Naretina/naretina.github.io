@@ -17,20 +17,45 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
-			// Retrieving x (time) & y (LAT) values
-			const xData = data.map(d => d.time);
+			// Retrieving y (LAT) values
 			const yData = data.map(d => +d.LAT);
-			// Retrieving the size (LATU) of the data points, which I still don't know how to use.
+			// Retrieving the size (LATU) of the data points
 			const sizeData = data.map(d => +d.LATU);
 
+			//Establishing dimensions and margins
+			const margin = {
+				top: 20,
+				right: 20,
+				bottom: 40,
+				left: 40
+			};
+			const canvasWidth = 500 - margin.left - margin.right;
+			const canvasHeight = 500 - margin.top - margin.bottom;
 			const canvas = document.getElementById("scatterplot_1");
+
+			// Creating a group for the scatterplot
+			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
+			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			canvas.appendChild(pointGroup);
+
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-				circle.setAttribute("cx", xData[i]);
-				circle.setAttribute("cy", yData[i]);
+				circle.setAttribute("cx", i);
+				circle.setAttribute("cy", canvasHeight - (yData[i]/arrayMax(yData)) * canvasHeight);
 				circle.setAttribute("r", sizeData[i]);
-				canvas.appendChild(circle);
+				pointGroup.appendChild(circle);
 			}
+		}
+
+		function arrayMax(arr) {
+			let len = arr.length;
+			let max = -Infinity;
+			while (len--) {
+				if (arr[len] > max) {
+					max = arr[len];
+				}
+			}
+			return max;
 		}
 
 		// Fetch data using jQuery
