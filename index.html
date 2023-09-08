@@ -43,16 +43,21 @@
 				axesGroup.appendChild(yAxis);
 		}
 
-		function label(margin, width, height, id) {
-			const canvas = document.getElementById(id);
+		function label(data, margin, width, height, id) {
+			// Create the x-axis labels
+			/* const canvas = document.getElementById(id);
 			const xLabelGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			xLabelGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(xLabelGroup);
 			if (id == "scatterplot_1") {
-				
+				for (let i = 0; i < data.length-1; i++) {
+					var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+						text.setAttribute()
+					point1Group.appendChild(text);
+				}
 			} else {
 
-			}
+			} */
 		}
 
 		function drawViz13(data) {
@@ -76,7 +81,7 @@
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
 			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_1");
-			label(margin, canvasWidth, canvasHeight, "scatterplot_1");
+			label(data, margin, canvasWidth, canvasHeight, "scatterplot_1");
 
 			// Creating separate group for points from Visualization 1
 			const canvas = document.getElementById(id);
@@ -99,7 +104,6 @@
 			}
 
 			// Creating separate group for points from Visualization 3
-			const canvas = document.getElementById(id);
 			const point2Group = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			point2Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(point2Group);
@@ -137,7 +141,7 @@
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
 			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_2");
-			label(margin, canvasWidth, canvasHeight, "scatterplot_2");
+			label(data, margin, canvasWidth, canvasHeight, "scatterplot_2");
 
 			// Creating separate group for points
 			const canvas = document.getElementById(id);
@@ -163,6 +167,8 @@
         $(document).ready(function() {
             $.getJSON("GlobalTemperatures.json")
                 .done(function(data) {
+					console.log(data);
+					console.log(data.length);
                     // Call the function to draw Visualizations 1 & 3
                     drawViz13(data);
 					// Call the function to draw Visualization 2
