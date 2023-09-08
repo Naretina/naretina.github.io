@@ -10,8 +10,8 @@
 		border: 1px solid grey
 	}
 	.elp {
-		fill: royalblue;
-		stroke: peachpuff;
+		fill: peachpuff;
+		stroke: orangered;
 	}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -145,6 +145,7 @@
 					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
 				ellipse.setAttribute("rx", majorData[i] * 3.5);
 				ellipse.setAttribute("ry", minorData[i] * 3.5);
+				ellipse.setAttribute("transform", "rotate(45)");
 				pointGroup.appendChild(ellipse);
 			}
 		}
