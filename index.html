@@ -9,10 +9,6 @@
 		height: 500px;
 		border: 1px solid grey
 	}
-	.elp {
-		fill: peachpuff;
-		stroke: orangered;
-	}
 	</style>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Scatterplots</title>
@@ -136,7 +132,6 @@
 			// Drawing plot points
 			for (let i = 0; i < xData.length-1; i++) {
 				var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
-				ellipse.setAttribute("class", "elp");
 				ellipse.setAttribute("cx",
 					(xData[i] - Math.min(...xData)) /
 					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
@@ -145,7 +140,6 @@
 					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
 				ellipse.setAttribute("rx", majorData[i] * 3.5);
 				ellipse.setAttribute("ry", minorData[i] * 3.5);
-				ellipse.setAttribute("transform", "rotate(45)");
 				pointGroup.appendChild(ellipse);
 			}
 		}
