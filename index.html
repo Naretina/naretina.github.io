@@ -68,21 +68,6 @@
 			const pointGroup = drawAxes(margin.left, margin.top,
 											canvasWidth, canvasHeight, "scatterplot_1");
 
-			// Drawing plot points for Visualization 3 (part of Visualization 1)
-			for (let i = 0; i < xData.length-1; i++) {
-				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-				circle.setAttribute("cx",
-					(xData[i] - Math.min(...xData)) /
-					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
-				circle.setAttribute("cy",
-					canvasHeight - (y2Data[i] - Math.min(...y2Data)) /
-					(Math.max(...y2Data) - Math.min(...y2Data)) * canvasHeight);
-				circle.setAttribute("r", size2Data[i] * 3.5);
-				circle.setAttribute("fill", "royalblue");
-				circle.setAttribute("stroke", "navy");
-				pointGroup.appendChild(circle);
-			}
-
 			// Drawing plot points for Visualization 1
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
@@ -97,11 +82,33 @@
 				circle.setAttribute("stroke", "orangered");
 				pointGroup.appendChild(circle);
 			}
+
+			// Drawing plot points for Visualization 3 (part of Visualization 1)
+			for (let i = 0; i < xData.length-1; i++) {
+				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+				circle.setAttribute("cx",
+					(xData[i] - Math.min(...xData)) /
+					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+				circle.setAttribute("cy",
+					canvasHeight - (y2Data[i] - Math.min(...y2Data)) /
+					(Math.max(...y2Data) - Math.min(...y2Data)) * canvasHeight);
+				circle.setAttribute("r", size2Data[i] * 3.5);
+				circle.setAttribute("fill", "royalblue");
+				circle.setAttribute("stroke", "navy");
+				pointGroup.appendChild(circle);
+			}
 		}
 
 		function drawViz2(data) {
+			// Retrieving x (LAT) & y (LOAT) values
+			const xData = data.map(d => +d.LAT);
+			const yData = data.map(d => +d.LOAT);
+			// Retrieving the major (LATU) & minor (LOATU) axes
+			const majorData = data.map(d => +d.LATU);
+			const minorData = data.map(d => +d.LOATU);
+
 			// Establishing the dimensions, margins, and axes of the graph
-			/* const margin = {
+			const margin = {
 				top: 20,
 				right: 20,
 				bottom: 40,
@@ -110,7 +117,21 @@
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
 			const pointGroup = drawAxes(margin.left, margin.top,
-											canvasWidth, canvasHeight, "scatterplot_2"); */
+											canvasWidth, canvasHeight, "scatterplot_2");
+
+			// Drawing plot points
+			for (let i = 0; i < xData.length-1; i++) {
+				var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
+				ellipse.setAttribute("cx",
+					(xData[i] - Math.min(...xData)) /
+					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+				ellipse.setAttribute("cy",
+					canvasHeight - (y1Data[i] - Math.min(...y1Data)) /
+					(Math.max(...y1Data) - Math.min(...y1Data)) * canvasHeight);
+				ellipse.setAttribute("rx", majorData[i] * 3.5);
+				ellipse.setAttribute("ry", minorData[i] * 3.5);
+				pointGroup.appendChild(ellipse);
+			}
 		}
 
 		// Fetch data using jQuery
