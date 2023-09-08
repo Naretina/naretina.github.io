@@ -79,7 +79,7 @@
 			point1Group.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(point1Group);
 			// Drawing plot points for Visualization 1
-			for (let i = 0; i < xData.length-1; i++) {
+			for (let i = 0; i < /*xData.length-*/1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
 					circle.setAttribute("cx",
 						(xData[i] - Math.min(...xData)) /
@@ -93,11 +93,8 @@
 				point1Group.appendChild(circle);
 
 				var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-					text.setAttribute("x",
-						(xData[i] - Math.min(...xData)) /
-						(Math.max(...xData) - Math.min(...xData)) * canvasWidth);;
-					text.setAttribute("y", canvasHeight + 20);
-					text.setAttribute("transform", "rotate(90 0,0)");
+					text.setAttribute("x", 250);
+					text.setAttribute("y", 250);
 					text.textContext = xData[i];
 				point1Group.appendChild(text);
 			}
