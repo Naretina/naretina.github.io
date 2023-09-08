@@ -21,15 +21,15 @@
 			// Creating a group for the scatterplot
 			const canvas = document.getElementById(id);
 			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
-			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
+			pointGroup.setAttribute("transform", "translate(" + left + "," + top + ")");
 			canvas.appendChild(pointGroup);
 
 			// Creating the x-axis
 			const xAxis = document.createElementNS("http://www.w3.org/2000/svg", 'line');
 				xAxis.setAttribute("x1", 0);
-				xAxis.setAttribute("y1", canvasHeight);
-				xAxis.setAttribute("x2", canvasWidth);
-				xAxis.setAttribute("y2", canvasHeight);
+				xAxis.setAttribute("y1", height);
+				xAxis.setAttribute("x2", width);
+				xAxis.setAttribute("y2", height);
 				xAxis.setAttribute("stroke", "black");
 				pointGroup.appendChild(xAxis);
 
@@ -38,7 +38,7 @@
 				yAxis.setAttribute("x1", 0);
 				yAxis.setAttribute("y1", 0);
 				yAxis.setAttribute("x2", 0);
-				yAxis.setAttribute("y2", canvasHeight);
+				yAxis.setAttribute("y2", height);
 				yAxis.setAttribute("stroke", "black");
 				pointGroup.appendChild(yAxis);
 
@@ -100,8 +100,17 @@
 		}
 
 		function drawViz2(data) {
-			// Establishing the boundaries and axes of the graph
-			const pointGroup = drawAxes("scatterplot_2");
+			// Establishing the dimensions, margins, and axes of the graph
+			/* const margin = {
+				top: 20,
+				right: 20,
+				bottom: 40,
+				left: 40
+			};
+			const canvasWidth = 500 - margin.left - margin.right;
+			const canvasHeight = 500 - margin.top - margin.bottom;
+			const pointGroup = drawAxes(margin.left, margin.top,
+											canvasWidth, canvasHeight, "scatterplot_2"); */
 		}
 
 		// Fetch data using jQuery
