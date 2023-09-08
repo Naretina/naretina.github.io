@@ -39,6 +39,25 @@
 			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(pointGroup);
 
+			// Creating the x-axis
+			const xAxis = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+				xAxis.setAttribute("x1", 0);
+				xAxis.setAttribute("y1", canvasHeight);
+				xAxis.setAttribute("x2", canvasWidth);
+				xAxis.setAttribute("y2", canvasHeight);
+				xAxis.setAttribute("stroke", "black");
+				pointGroup.appendChild(xAxis);
+
+			// Creating the y-axis
+			const yAxis = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+				yAxis.setAttribute("x1", 0);
+				yAxis.setAttribute("y1", 0);
+				yAxis.setAttribute("x2", 0);
+				yAxis.setAttribute("y2", canvasHeight);
+				yAxis.setAttribute("stroke", "black");
+				pointGroup.appendChild(yAxis);
+
+			// Drawing plot points for Visualization 1
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
 				circle.setAttribute("cx",
@@ -48,6 +67,7 @@
 					canvasHeight - (yData[i] - Math.min(...yData)) /
 					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
 				circle.setAttribute("r", sizeData[i] * 3);
+				circle.setAttribute("fill", "peachpuff"); // I want to use royalblue for part 3
 				pointGroup.appendChild(circle);
 			}
 		}
