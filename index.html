@@ -17,7 +17,8 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
-			// Retrieving y (LAT) values
+			// Retrieving x (time) & y (LAT) values
+			const xData = data.map(d => d.time);
 			const yData = data.map(d => +d.LAT);
 			// Retrieving the size (LATU) of the data points
 			const sizeData = data.map(d => +d.LATU);
@@ -40,22 +41,15 @@
 
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-				circle.setAttribute("cx", i);
-				circle.setAttribute("cy", canvasHeight - (yData[i]/arrayMax(yData)) * canvasHeight);
+				circle.setAttribute("cx",
+					(xData[i] - Math.min(...xData)) /
+					(Math.max(...xData) - Math.min(...xData)) * chartWidth);
+				circle.setAttribute("cy",
+					canvasHeight - (yData[i] - Math.min(...yData)) /
+					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
 				circle.setAttribute("r", sizeData[i]);
 				pointGroup.appendChild(circle);
 			}
-		}
-
-		function arrayMax(arr) {
-			let len = arr.length;
-			let max = -Infinity;
-			while (len--) {
-				if (arr[len] > max) {
-					max = arr[len];
-				}
-			}
-			return max;
 		}
 
 		// Fetch data using jQuery
