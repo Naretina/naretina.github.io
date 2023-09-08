@@ -43,24 +43,6 @@
 				axesGroup.appendChild(yAxis);
 		}
 
-		function label(data, margin, width, height, id) {
-			// Create the x-axis labels
-			/* const canvas = document.getElementById(id);
-			const xLabelGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
-			xLabelGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
-			canvas.appendChild(xLabelGroup);
-			if (id == "scatterplot_1") {
-				var year = 1850;
-				for (let i = 0; i < data.length-1; i++) {
-					var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-						text.setAttribute("x", );
-					point1Group.appendChild(text);
-				}
-			} else {
-
-			} */
-		}
-
 		function drawViz13(data) {
 			// Retrieving x (time) & y (LAT) values for Visualization 1
 			const xData = data.map(d => d.time);
@@ -82,7 +64,6 @@
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
 			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_1");
-			label(data, margin, canvasWidth, canvasHeight, "scatterplot_1");
 
 			// Creating separate group for points from Visualization 1
 			const canvas = document.getElementById("scatterplot_1");
@@ -142,7 +123,6 @@
 			const canvasWidth = 500 - margin.left - margin.right;
 			const canvasHeight = 500 - margin.top - margin.bottom;
 			drawAxes(margin, canvasWidth, canvasHeight, "scatterplot_2");
-			label(data, margin, canvasWidth, canvasHeight, "scatterplot_2");
 
 			// Creating separate group for points
 			const canvas = document.getElementById("scatterplot_2");
