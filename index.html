@@ -17,19 +17,9 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<svg id="scatterplot_2" class="scatter"></svg>
 	<script>
-		function drawAxes(id) {
-			//Establishing dimensions and margins
-			const margin = {
-				top: 20,
-				right: 20,
-				bottom: 40,
-				left: 40
-			};
-			const canvasWidth = 500 - margin.left - margin.right;
-			const canvasHeight = 500 - margin.top - margin.bottom;
-			const canvas = document.getElementById(id);
-
+		function drawAxes(left, top, width, height, id) {
 			// Creating a group for the scatterplot
+			const canvas = document.getElementById(id);
 			const pointGroup = document.createElementNS("http://www.w3.org/2000/svg", 'g');
 			pointGroup.setAttribute("transform", "translate(" + margin.left + "," + margin.top + ")");
 			canvas.appendChild(pointGroup);
@@ -55,7 +45,7 @@
 			return pointGroup;
 		}
 
-		function drawScatter(data) {
+		function drawViz13(data) {
 			// Retrieving x (time) & y (LAT) values for Visualization 1
 			const xData = data.map(d => d.time);
 			const y1Data = data.map(d => +d.LAT);
@@ -66,8 +56,17 @@
 			const y2Data = data.map(d => +d.LOAT);
 			const size2Data = data.map(d => +d.LOATU);
 
-			// Establishing the boundaries and axes of the graph
-			const pointGroup = drawAxes("scatterplot_1");
+			// Establishing the dimensions, margins, and axes of the graph
+			const margin = {
+				top: 20,
+				right: 20,
+				bottom: 40,
+				left: 40
+			};
+			const canvasWidth = 500 - margin.left - margin.right;
+			const canvasHeight = 500 - margin.top - margin.bottom;
+			const pointGroup = drawAxes(margin.left, margin.top,
+											canvasWidth, canvasHeight, "scatterplot_1");
 
 			// Drawing plot points for Visualization 3 (part of Visualization 1)
 			for (let i = 0; i < xData.length-1; i++) {
@@ -100,7 +99,7 @@
 			}
 		}
 
-		function drawEllipse(data) {
+		function drawViz2(data) {
 			// Establishing the boundaries and axes of the graph
 			const pointGroup = drawAxes("scatterplot_2");
 		}
@@ -110,9 +109,9 @@
             $.getJSON("GlobalTemperatures.json")
                 .done(function(data) {
                     // Call the function to draw Visualizations 1 & 3
-                    drawScatter(data);
+                    drawViz13(data);
 					// Call the function to draw Visualization 2
-					drawEllipse(data);
+					drawViz2(data);
                 })
                 .fail(function(error) {
                     console.error("Error loading JSON file:", error);
