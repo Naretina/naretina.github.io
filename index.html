@@ -61,6 +61,21 @@
 				yAxis.setAttribute("stroke", "black");
 				pointGroup.appendChild(yAxis);
 
+			// Drawing plot points for Visualization 3 (part of Visualization 1)
+			for (let i = 0; i < xData.length-1; i++) {
+				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+				circle.setAttribute("cx",
+					(xData[i] - Math.min(...xData)) /
+					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+				circle.setAttribute("cy",
+					canvasHeight - (y2Data[i] - Math.min(...y2Data)) /
+					(Math.max(...y2Data) - Math.min(...y2Data)) * canvasHeight);
+				circle.setAttribute("r", size2Data[i] * 3.5);
+				circle.setAttribute("fill", "royalblue"); // I want to use royalblue for part 3
+				circle.setAttribute("stroke", "navy");
+				pointGroup.appendChild(circle);
+			}
+
 			// Drawing plot points for Visualization 1
 			for (let i = 0; i < xData.length-1; i++) {
 				var circle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
