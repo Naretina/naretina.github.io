@@ -17,11 +17,15 @@
 	<svg id="scatterplot_1" class="scatter"></svg>
 	<script>
 		function drawScatter(data) {
-			// Retrieving x (time) & y (LAT) values
+			// Retrieving x (time) & y (LAT) values for Visualization 1
 			const xData = data.map(d => d.time);
-			const yData = data.map(d => +d.LAT);
-			// Retrieving the size (LATU) of the data points
+			const y1Data = data.map(d => +d.LAT);
+			// Retrieving the size (LATU) of the data points for Visualization 1
 			const sizeData = data.map(d => +d.LATU);
+
+			// Retrieving the y (LOAT) values and size (LOATU) for Visualization 3
+			const y2Data = data.map(d => +d.LOAT);
+			const size2Data = data.map(d => +d.LOATU);
 
 			//Establishing dimensions and margins
 			const margin = {
@@ -64,10 +68,11 @@
 					(xData[i] - Math.min(...xData)) /
 					(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
 				circle.setAttribute("cy",
-					canvasHeight - (yData[i] - Math.min(...yData)) /
-					(Math.max(...yData) - Math.min(...yData)) * canvasHeight);
-				circle.setAttribute("r", sizeData[i] * 3);
+					canvasHeight - (y1Data[i] - Math.min(...y1Data)) /
+					(Math.max(...y1Data) - Math.min(...y1Data)) * canvasHeight);
+				circle.setAttribute("r", sizeData[i] * 3.5);
 				circle.setAttribute("fill", "peachpuff"); // I want to use royalblue for part 3
+				circle.setAttribute("stroke", "orangered");
 				pointGroup.appendChild(circle);
 			}
 		}
