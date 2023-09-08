@@ -93,8 +93,9 @@
 				point1Group.appendChild(circle);
 
 				var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-					text.setAttribute("x", xData[i] - Math.min(...xData)) /
-						(Math.max(...xData) - Math.min(...xData)) * canvasWidth);
+					text.setAttribute("x",
+						(xData[i] - Math.min(...xData)) /
+						(Math.max(...xData) - Math.min(...xData)) * canvasWidth);;
 					text.setAttribute("y", canvasHeight + 20);
 					text.setAttribute("transform", "rotate(90 0,0)");
 					label.textContext = xData[i];
