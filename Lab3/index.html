@@ -12,18 +12,34 @@
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<script>
-			async function loadData() {
-				// load the data
-				return await d3.json("GlobalTemperatures.json");
-			}
-		</script>
+		async function loadData() {
+			return await d3.json("GlobalTemperatures.json");
+		}
+	</script>
 	<title>D3 Scatterplots</title>
 </head>
 <body>
-	<div id="plot1">
+	<div id="scatterplot_1" class="scatter">
 		<script>
+			// Loading in the data for the first plot
 			const data = loadData();
 			console.log(data);
+
+			// Setting up the canvas and its boundaries
+			const margin = {
+				top: 10,
+				right: 30,
+				bottom: 30,
+				left: 60
+			},
+			canvasWidth = 500 - margin.left - margin.right,
+			canvasHeight = 500 - margin.top - margin.bottom;
+
+			const canvas = d3
+				.select("scatterplot_1")
+				.append("svg")
+				.attr("width", 500)
+				.attr("height", 500);
 		</script>
 	</div>
 </body>
