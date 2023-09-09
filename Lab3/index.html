@@ -11,19 +11,19 @@
 	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script>
+			async function loadData() {
+				// load the data
+				return await d3.json("GlobalTemperatures.json");
+			}
+		</script>
 	<title>D3 Scatterplots</title>
 </head>
 <body>
 	<div id="plot1">
 		<script>
-			async function loadData() {
-				// load the data
-				const data = await d3.json("GlobalTemperatures.json");
-				console.log(data);
-
-				return data;
-			}
 			const data = loadData();
+			console.log(data);
 		</script>
 	</div>
 </body>
