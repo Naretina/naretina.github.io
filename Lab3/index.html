@@ -40,6 +40,18 @@
 				.append("svg")
 				.attr("width", 500)
 				.attr("height", 500);
+
+			// TODO: X-axis goes here
+
+			// Adding the y-axis
+			const y = d3
+				.scaleLinear()
+				.domain([10, 20])
+				.range([canvasHeight, 5]);
+			const yAxis = canvas
+				.append("g")
+				.attr("transform", "translate(60, 0)")
+				.call(d3.axisLeft(y));
 		</script>
 	</div>
 </body>
