@@ -41,7 +41,15 @@
 				.attr("width", 500)
 				.attr("height", 500);
 
-			// TODO: X-axis goes here
+			// Adding the x-axis (?)
+			const x = d3
+				.scaleTime()
+				.domain([new Date("1850-01-01"), new Date("2015-12-01"]))
+				.range([60, canvasWidth+60]);
+			const xAxis = canvas
+				.append("g")
+				.attr("transform", "translate(0," + canvasHeight + ")")
+				.call(d3.axisBottom(x));
 
 			// Adding the y-axis
 			const y = d3
