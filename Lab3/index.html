@@ -41,7 +41,7 @@
 				.attr("width", 500)
 				.attr("height", 500);
 
-			// Adding the x-axis (?)
+			// Adding the x-axis
 			const x = d3
 				.scaleTime()
 				.domain([new Date("1850-01-01"), new Date("2015-12-01")])
@@ -60,6 +60,27 @@
 				.append("g")
 				.attr("transform", "translate(60, 0)")
 				.call(d3.axisLeft(y));
+
+			// Adding LAT points
+			var firstPoints = canvas
+				.append("g")
+				.selectAll("dot")
+				.data(data)
+				.join("circle")
+				.attr("cx", function(d, i) {
+					// Not quite sure if this will work.
+					const parseTime = d3.utcParse("%Y%m%d");
+					return x(parseTime(d.time));
+				})
+				.attr("cy", function(d, i) {
+					return y(+d.LAT);
+				})
+				.attr("r", function(d, i) {
+					// Not sure if this'll work either.
+					return (+d.LATU * 3.5);
+				})
+				.style("fill", "peachpuff")
+				.style("stroke", "orangered");
 		</script>
 	</div>
 </body>
