@@ -24,6 +24,10 @@
 			// Loading in the data for the first plot
 			const data = loadData();
 			console.log(data);
+			
+			// Checking to see what kind of data time is again.
+			console.log(data.time);
+			console.log(typeof data.time[0]);
 
 			// Setting up the canvas and its boundaries
 			const margin = {
@@ -62,7 +66,7 @@
 				.call(d3.axisLeft(y));
 
 			// Adding LAT points
-			var firstPoints = canvas
+			/* var firstPoints = canvas
 				.append("g")
 				.selectAll("dot")
 				.data(data)
@@ -80,7 +84,7 @@
 					return (+d.LATU * 3.5);
 				})
 				.style("fill", "peachpuff")
-				.style("stroke", "orangered");
+				.style("stroke", "orangered"); */
 		</script>
 	</div>
 </body>
