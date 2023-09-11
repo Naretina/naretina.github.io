@@ -71,12 +71,13 @@
 				.attr("cx", function(d, i) {
 					// Not quite sure if this will work.
 					const parseTime = d3.utcParse("%Y%m%d");
+					console.log(parseTime(d.time)); // This is what normally executes.
 					return x(parseTime(d.time));
 				})
 				.attr("cy", function(d, i) {
 					return y(+d.LAT);
 				})
-				.attr("r", 3); // For now, leave the radius like this so I can understand what is happening.
+				.attr("r", 3); // Change later.
 		</script>
 	</div>
 </body>
