@@ -50,7 +50,7 @@
 				// Adding the y-axis
 				const y = d3
 					.scaleLinear()
-					.domain([10, 20])
+					.domain([0, 15])
 					.range([canvasHeight, 5]);
 				const yAxis = canvas
 					.append("g")
@@ -65,10 +65,11 @@
 					.data(data)
 					.join("circle")
 					.attr("cx", function(d, i) {
-						// TODO: Fix cx
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
 						const parseTime = d3.utcParse("%Y%m%d");
-						// TODO: Fix cx
-						console.log(parseTime(d.time)); // This is what normally executes.
 						return x(parseTime(d.time));
 					})
 					.attr("cy", function(d, i) {
