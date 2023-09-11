@@ -14,7 +14,7 @@
 	<title>D3 Scatterplots</title>
 </head>
 <body>
-	<div id="scatterplot">
+	<div id="scatterplots">
 		<script>
 			async function Scatter() {
 				// Loading in the data for the first plot
@@ -32,8 +32,9 @@
 				canvasHeight = 500 - margin.top - margin.bottom;
 
 				const canvas = d3
-					.select("#scatterplot")
+					.select("#scatterplots")
 					.append("svg")
+					.attr("id", "scatterplot_1")
 					.attr("class", "scatter"); // Can I add a class without an id?
 
 				// Adding the x-axis
@@ -45,6 +46,12 @@
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(x));
+
+				// First finding the y-variables
+				console.log(d3.min(+data.LAT));
+				console.log(d3.max(+data.LAT));
+				console.log(d3.min(+data.LOAT));
+				console.log(d3.max(+data.LOAT));
 
 				// Adding the y-axis
 				const y = d3
@@ -103,6 +110,9 @@
 					})
 					.style("fill", "royalblue")
 					.style("stroke", "navy");
+
+				/* ----- SCATTERPLOT 2 ----- */
+				// To be added...
 			}
 			Scatter();
 		</script>
