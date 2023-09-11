@@ -66,8 +66,10 @@
 					.join("circle")
 					.attr("cx", function(d, i) {
 						// TODO: Fix cx
-						console.log(d.time); // This is what normally executes.
-						return x(d.time);
+						const parseTime = d3.utcParse("%Y%m%d");
+						// TODO: Fix cx
+						console.log(parseTime(d.time)); // This is what normally executes.
+						return x(parseTime(d.time));
 					})
 					.attr("cy", function(d, i) {
 						return y(+d.LAT);
