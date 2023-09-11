@@ -50,7 +50,7 @@
 				// Adding the y-axis
 				const y = d3
 					.scaleLinear()
-					.domain([0, 15])
+					.domain([0, 20])
 					.range([canvasHeight, 5]);
 				const yAxis = canvas
 					.append("g")
@@ -75,7 +75,10 @@
 					.attr("cy", function(d, i) {
 						return y(+d.LAT);
 					})
-					.attr("r", 3); // Change later.
+					.attr("r", function(d, i) {
+						// I'm not sure how well this sizing will work out.
+						return (+d.LATU * 3.5);
+					})
 			}
 			Scatter();
 		</script>
