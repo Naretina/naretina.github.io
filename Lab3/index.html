@@ -69,10 +69,9 @@
 				.data(data)
 				.join("circle")
 				.attr("cx", function(d, i) {
-					// Not quite sure if this will work.
-					const parseTime = d3.utcParse("%Y%m%d");
+					// TODO: Fix cx
 					console.log(parseTime(d.time)); // This is what normally executes.
-					return x(parseTime(d.time));
+					return x(d.time);
 				})
 				.attr("cy", function(d, i) {
 					return y(+d.LAT);
