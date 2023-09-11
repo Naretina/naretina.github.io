@@ -24,6 +24,7 @@
 			// Loading in the data for the first plot
 			const data = loadData();
 			console.log(data);
+			console.log(data[0]); // I want to see if this does anything.
 
 			// Setting up the canvas and its boundaries
 			const margin = {
@@ -70,7 +71,7 @@
 				.join("circle")
 				.attr("cx", function(d, i) {
 					// TODO: Fix cx
-					console.log(parseTime(d.time)); // This is what normally executes.
+					console.log(d.time); // This is what normally executes.
 					return x(d.time);
 				})
 				.attr("cy", function(d, i) {
