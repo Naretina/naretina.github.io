@@ -26,8 +26,8 @@
 			console.log(data);
 			
 			// Checking to see what kind of data time is again.
-			console.log(data.time);
-			console.log(typeof data.time[0]);
+			const dataTime = data.map(d => d.time);
+			console.log(typeof dataTime[0]);
 
 			// Setting up the canvas and its boundaries
 			const margin = {
@@ -68,6 +68,7 @@
 			// Adding LAT points
 			/* var firstPoints = canvas
 				.append("g")
+				.attr("id", "chart1")
 				.selectAll("dot")
 				.data(data)
 				.join("circle")
@@ -82,9 +83,7 @@
 				.attr("r", function(d, i) {
 					// Not sure if this'll work either.
 					return (+d.LATU * 3.5);
-				})
-				.style("fill", "peachpuff")
-				.style("stroke", "orangered"); */
+				}); */
 		</script>
 	</div>
 </body>
