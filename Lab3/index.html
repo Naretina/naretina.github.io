@@ -43,7 +43,7 @@
 
 			// Adding the x-axis
 			const x = d3
-				.scaleLinear()
+				.scaleTime()
 				.domain([new Date("1850-01-01"), new Date("2015-12-01")])
 				.range([60, canvasWidth+60]);
 			const xAxis = canvas
