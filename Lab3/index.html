@@ -9,10 +9,6 @@
 		height: 500px;
 		border: 1px solid grey
 	}
-	.chart1 {
-		fill: peachpuff;
-		stroke: orangered;
-	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>D3 Scatterplots</title>
@@ -80,9 +76,10 @@
 						return y(+d.LAT);
 					})
 					.attr("r", function(d, i) {
-						// I'm not sure how well this sizing will work out.
 						return (+d.LATU * 3.5);
 					})
+					.style("fill", "peachpuff")
+					.style("stroke", "orangered");
 			}
 			Scatter();
 		</script>
