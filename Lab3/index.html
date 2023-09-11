@@ -48,10 +48,10 @@
 					.call(d3.axisBottom(x));
 
 				// First finding the y-variables
-				console.log(d3.min(data.LAT));
-				console.log(d3.max(data.LAT));
-				console.log(d3.min(data.LOAT));
-				console.log(d3.max(data.LOAT));
+				console.log(Math.min(...data.LAT));
+				console.log(Math.max(...data.LAT));
+				console.log(Math.min(...data.LOAT));
+				console.log(Math.max(...data.LOAT));
 
 				// Adding the y-axis
 				const y = d3
