@@ -14,7 +14,7 @@
 	<title>D3 Scatterplots</title>
 </head>
 <body>
-	<div id="scatterplot_1" class="scatter">
+	<div id="scatterplot">
 		<script>
 			async function Scatter() {
 				// Loading in the data for the first plot
@@ -32,10 +32,9 @@
 				canvasHeight = 500 - margin.top - margin.bottom;
 
 				const canvas = d3
-					.select("#scatterplot_1")
+					.select("#scatterplot")
 					.append("svg")
-					.attr("width", 500)
-					.attr("height", 500);
+					.attr("class", "scatter"); // Can I add a class without an id?
 
 				// Adding the x-axis
 				const x = d3
@@ -80,6 +79,30 @@
 					})
 					.style("fill", "peachpuff")
 					.style("stroke", "orangered");
+
+				// Adding LOAT points
+				var secondPoints = canvas
+					.append("g")
+					.attr("id", "chart3")
+					.selectAll("dot")
+					.data(data)
+					.join("circle")
+					.attr("cx", function(d, i) {
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
+						const parseTime = d3.utcParse("%Y%m%d");
+						return x(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return y(+d.LOAT);
+					})
+					.attr("r", function(d, i) {
+						return (+d.LOATU * 3.5);
+					})
+					.style("fill", "royalblue")
+					.style("stroke", "navy");
 			}
 			Scatter();
 		</script>
