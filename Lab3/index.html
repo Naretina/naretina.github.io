@@ -9,6 +9,10 @@
 		height: 500px;
 		border: 1px solid grey
 	}
+	.chart1 {
+		fill: peachpuff;
+		stroke: orangered;
+	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>D3 Scatterplots</title>
@@ -50,7 +54,7 @@
 				// Adding the y-axis
 				const y = d3
 					.scaleLinear()
-					.domain([0, 20])
+					.domain([0, 16])
 					.range([canvasHeight, 5]);
 				const yAxis = canvas
 					.append("g")
