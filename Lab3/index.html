@@ -62,7 +62,7 @@
 				.call(d3.axisLeft(y));
 
 			// Adding LAT points
-			/* var firstPoints = canvas
+			var firstPoints = canvas
 				.append("g")
 				.attr("id", "chart1")
 				.selectAll("dot")
@@ -76,10 +76,7 @@
 				.attr("cy", function(d, i) {
 					return y(+d.LAT);
 				})
-				.attr("r", function(d, i) {
-					// Not sure if this'll work either.
-					return (+d.LATU * 3.5);
-				}); */
+				.attr("r", 3); // For now, leave the radius like this so I can understand what is happening.
 		</script>
 	</div>
 </body>
