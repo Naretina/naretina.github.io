@@ -24,9 +24,6 @@
 			// Loading in the data for the first plot
 			const data = loadData();
 			console.log(data);
-			
-			// Checking to see what kind of data time is again.
-			console.log(typeof data[time]);
 
 			// Setting up the canvas and its boundaries
 			const margin = {
@@ -46,7 +43,7 @@
 
 			// Adding the x-axis
 			const x = d3
-				.scaleTime()
+				.scaleLinear()
 				.domain([new Date("1850-01-01"), new Date("2015-12-01")])
 				.range([60, canvasWidth+60]);
 			const xAxis = canvas
