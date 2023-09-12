@@ -107,7 +107,7 @@
 
 				/* ----- SCATTERPLOT 2 ----- */
 
-				const canvas = d3
+				const canvas2 = d3
 					.select("#scatterplots")
 					.append("svg")
 					.attr("id", "scatterplot_2")
@@ -118,7 +118,7 @@
 					.scaleLinear()
 					.domain([0, 16])
 					.range([60, canvasWidth+60]);
-				const xAxis = canvas
+				const xAxis = canvas2
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(x));
@@ -128,13 +128,13 @@
 					.scaleLinear()
 					.domain([12, 18])
 					.range([canvasHeight, 5]);
-				const yAxis = canvas
+				const yAxis = canvas2
 					.append("g")
 					.attr("transform", "translate(60, 0)")
 					.call(d3.axisLeft(y));
 
 				// Adding points
-				var firstPoints = canvas
+				var firstPoints = canvas2
 					.append("g")
 					.attr("id", "chart2")
 					.selectAll("dot")
