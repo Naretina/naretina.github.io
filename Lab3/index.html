@@ -141,17 +141,23 @@
 					.data(data)
 					.join("ellipse")
 					.attr("cx", function(d, i) {
-						return x2(+d.LAT);
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
+						const parseTime = d3.utcParse("%Y%m%d");
+						return x2(parseTime(d.time));
 					})
 					.attr("cy", function(d, i) {
-						return y2(+d.LOAT);
+						return y2(+d.LAT);
 					})
 					.attr("rx", function(d, i) {
 						return (+d.LATU * 3.5);
 					})
 					.attr("ry", function(d, i) {
 						return (+d.LOATU * 3.5);
-					});
+					})
+					.style("fill", "black");
 			}
 			Scatter();
 		</script>
