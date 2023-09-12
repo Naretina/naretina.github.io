@@ -106,7 +106,57 @@
 					.style("stroke", "navy");
 
 				/* ----- SCATTERPLOT 2 ----- */
-				// To be added...
+
+				const canvas = d3
+					.select("#scatterplots")
+					.append("svg")
+					.attr("id", "scatterplot_2")
+					.attr("class", "scatter"); // Can I add a class without an id?
+
+				// Adding the x-axis (LAT)
+				const x = d3
+					.scaleLinear()
+					.domain([0, 16])
+					.range([60, canvasWidth+60]);
+				const xAxis = canvas
+					.append("g")
+					.attr("transform", "translate(0," + canvasHeight + ")")
+					.call(d3.axisBottom(x));
+
+				// Adding the y-axis (LOAT)
+				const y = d3
+					.scaleLinear()
+					.domain([12, 18])
+					.range([canvasHeight, 5]);
+				const yAxis = canvas
+					.append("g")
+					.attr("transform", "translate(60, 0)")
+					.call(d3.axisLeft(y));
+
+				// Adding points
+				var firstPoints = canvas
+					.append("g")
+					.attr("id", "chart2")
+					.selectAll("dot")
+					.data(data)
+					.join("ellipse")
+					.attr("cx", function(d, i) {
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
+						const parseTime = d3.utcParse("%Y%m%d");
+						return x(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return y(+d.LAT);
+					})
+					.attr("rx", function(d, i) {
+						return (+d.LATU * 3.5);
+					})
+					.attr("ry", function(d, i) {
+						return (+d.LOATU * 3.5);
+					})
 			}
 			Scatter();
 		</script>
