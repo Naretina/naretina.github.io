@@ -133,8 +133,8 @@
 					.attr("transform", "translate(60, 0)")
 					.call(d3.axisLeft(y2));
 
-				// Adding points
-				var firstPoints = canvas2
+				// Adding points for the second scatterplot
+				var points = canvas2
 					.append("g")
 					.attr("id", "chart2")
 					.selectAll("dot")
@@ -157,6 +157,7 @@
 					.attr("ry", function(d, i) {
 						return (+d.LOATU * 3.5);
 					})
+					.style("fill", "black");
 			}
 			Scatter();
 		</script>
