@@ -118,7 +118,7 @@
 					.scaleLinear()
 					.domain([0, 16])
 					.range([60, canvasWidth+60]);
-				const xAxis = canvas2
+				const x2Axis = canvas2
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(x2));
@@ -128,7 +128,7 @@
 					.scaleLinear()
 					.domain([12, 18])
 					.range([canvasHeight, 5]);
-				const yAxis = canvas2
+				const y2Axis = canvas2
 					.append("g")
 					.attr("transform", "translate(60, 0)")
 					.call(d3.axisLeft(y2));
