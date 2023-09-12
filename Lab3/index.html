@@ -7,7 +7,6 @@
 	.scatter {
 		width: 500px;
 		height: 500px;
-		border: 1px solid grey
 	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
@@ -141,15 +140,10 @@
 					.data(data)
 					.join("ellipse")
 					.attr("cx", function(d, i) {
-						/*
-						The time parsed is behind only by 2 hours,
-						which is nothing compared to (2015-1850) = 165 years.
-						*/
-						const parseTime = d3.utcParse("%Y%m%d");
-						return x2(parseTime(d.time));
+						return x2(+d.LAT);
 					})
 					.attr("cy", function(d, i) {
-						return y2(+d.LAT);
+						return y2(+d.LOAT);
 					})
 					.attr("rx", function(d, i) {
 						return (+d.LATU * 3.5);
@@ -159,7 +153,13 @@
 					})
 					.style("fill", "black");
 			}
+
+			async function Image() {
+				// Nothing yet. Still need to find images.
+			}
+
 			Scatter();
+			Image();
 		</script>
 	</div>
 </body>
