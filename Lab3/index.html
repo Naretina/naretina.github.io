@@ -34,7 +34,8 @@
 					.select("#scatterplots")
 					.append("svg")
 					.attr("id", "scatterplot_1")
-					.attr("class", "scatter"); // Can I add a class without an id?
+					.attr("class", "scatter");
+				Image("#scatterplot_1", "Monochrome.png");
 
 				// Adding the x-axis
 				const x = d3
@@ -110,7 +111,8 @@
 					.select("#scatterplots")
 					.append("svg")
 					.attr("id", "scatterplot_2")
-					.attr("class", "scatter"); // Can I add a class without an id?
+					.attr("class", "scatter");
+				Image("#scatterplot_2", "Bright Color.png");
 
 				// Adding the x-axis (LAT)
 				const x2 = d3
@@ -154,12 +156,28 @@
 					.style("fill", "black");
 			}
 
-			async function Image() {
-				// Nothing yet. Still need to find images.
+			function Image(svgID, imageName) {
+				// load external image
+				const image = d3.select(svgID).append("image")
+					.attr("xlink:href", imageName)
+					.attr("width", 500); //set the width of image, d3 will keep the aspect ratio automatically
+
+				// generate the line
+				const lineGenerator = d3.line();
+				const points = [
+					[0, 0],
+					[100, 100]
+				];
+				const pathData = lineGenerator(points);
+
+				// draw a line from 0,0 to 100,100
+				d3.select("svg").append("path")
+					.attr("d", pathData)
+					.attr("stroke-width", 2)
+					.attr("stroke", "#3afa56");
 			}
 
 			Scatter();
-			Image();
 		</script>
 	</div>
 </body>
