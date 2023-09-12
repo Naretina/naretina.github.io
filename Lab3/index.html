@@ -47,16 +47,10 @@
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(x));
 
-				// First finding the y-variables
-				console.log(Math.min(...data.LAT));
-				console.log(Math.max(...data.LAT));
-				console.log(Math.min(...data.LOAT));
-				console.log(Math.max(...data.LOAT));
-
 				// Adding the y-axis
 				const y = d3
 					.scaleLinear()
-					.domain([0, 16])
+					.domain([0, 18])
 					.range([canvasHeight, 5]);
 				const yAxis = canvas
 					.append("g")
