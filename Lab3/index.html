@@ -35,6 +35,7 @@
 					.append("svg")
 					.attr("id", "scatterplot_1")
 					.attr("class", "scatter");
+				// Adding the background image for the first scatterplot
 				Image("#scatterplot_1", "Monochrome.png");
 
 				// Adding the x-axis
@@ -107,12 +108,14 @@
 
 				/* ----- SCATTERPLOT 2 ----- */
 
+				// Setting up the canvas for the second scatterplot
 				const canvas2 = d3
 					.select("#scatterplots")
 					.append("svg")
 					.attr("id", "scatterplot_2")
 					.attr("class", "scatter");
-				Image("#scatterplot_2", "Bright Color.png");
+				// Adding the background image for the second scatterplot
+				Image("#scatterplot_2", "Bright Color Altered.png");
 
 				// Adding the x-axis (LAT)
 				const x2 = d3
@@ -164,6 +167,10 @@
 					.attr("height", 500)
 					.attr("x", 60)
 					.attr("y", 35);
+				/*
+				If you need to see the scatterplots better,
+				Inspect the webpage (right-click then finding Inspect)
+				then find the svg image element, right-click, then press Hide Element*/
 			}
 
 			Scatter();
