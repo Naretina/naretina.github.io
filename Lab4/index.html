@@ -7,5 +7,100 @@
 	<title>Interactive D3 Scatterplots</title>
 </head>
 <body>
+	<div id="scatterplot_1">
+		<script>
+			async function Scatter() {
+				// Loading in the data for the first plot
+				const data = await d3.json("GlobalTemperatures.json");
+				console.log(data);
+
+				// Setting up the canvas and its boundaries
+				const margin = {
+					top: 30,
+					right: 10,
+					bottom: 30,
+					left: 60
+				},
+				canvasWidth = 500 - margin.left - margin.right,
+				canvasHeight = 500 - margin.top - margin.bottom;
+
+				const canvas = d3
+					.select("#scatterplots")
+					.append("svg")
+					.attr("id", "scatterplot_1")
+					.attr("class", "scatter");
+
+				// Adding the x-axis
+				const x = d3
+					.scaleTime()
+					.domain([new Date("1850-01-01"), new Date("2015-12-01")])
+					.range([60, canvasWidth+60]);
+				const xAxis = canvas
+					.append("g")
+					.attr("transform", "translate(0," + canvasHeight + ")")
+					.call(d3.axisBottom(x));
+
+				// Adding the y-axis
+				const y = d3
+					.scaleLinear()
+					.domain([0, 18])
+					.range([canvasHeight, 5]);
+				const yAxis = canvas
+					.append("g")
+					.attr("transform", "translate(60, 0)")
+					.call(d3.axisLeft(y));
+
+				// Adding LAT points
+				var firstPoints = canvas
+					.append("g")
+					.attr("id", "chart1")
+					.selectAll("dot")
+					.data(data)
+					.join("circle")
+					.attr("cx", function(d, i) {
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
+						const parseTime = d3.utcParse("%Y%m%d");
+						return x(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return y(+d.LAT);
+					})
+					.attr("r", function(d, i) {
+						return (+d.LATU * 3.5);
+					})
+					.style("fill", "peachpuff")
+					.style("stroke", "orangered");
+
+				// Adding LOAT points
+				var secondPoints = canvas
+					.append("g")
+					.attr("id", "chart3")
+					.selectAll("dot")
+					.data(data)
+					.join("circle")
+					.attr("cx", function(d, i) {
+						/*
+						The time parsed is behind only by 2 hours,
+						which is nothing compared to (2015-1850) = 165 years.
+						*/
+						const parseTime = d3.utcParse("%Y%m%d");
+						return x(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return y(+d.LOAT);
+					})
+					.attr("r", function(d, i) {
+						return (+d.LOATU * 3.5);
+					})
+					.style("fill", "royalblue")
+					.style("stroke", "navy");
+			}
+
+			Scatter();
+		</script>
+	</div>
 </body>
 </html>
