@@ -25,30 +25,25 @@
 				canvasHeight = 500 - margin.top - margin.bottom;
 
 				const canvas = d3
-					.select("#scatterplots")
+					.select("#scatterplot_1")
 					.append("svg")
-					.attr("id", "scatterplot_1")
+					.attr("id", "scatterplot")
 					.attr("class", "scatter");
 
 				// Adding the x-axis
-				const x = d3
-					.scaleTime()
-					.domain([new Date("1850-01-01"), new Date("2015-12-01")])
-					.range([60, canvasWidth+60]);
+				const cxScale = d3.scaleTime([new Date("1850-01-01"), new Date("2015-12-01")],
+												[60, canvasWidth+60]);
 				const xAxis = canvas
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
-					.call(d3.axisBottom(x));
+					.call(d3.axisBottom(cxScale));
 
 				// Adding the y-axis
-				const y = d3
-					.scaleLinear()
-					.domain([0, 18])
-					.range([canvasHeight, 5]);
+				const cyScale = d3.scaleLinear([0, 18], [canvasHeight, 5]);
 				const yAxis = canvas
 					.append("g")
 					.attr("transform", "translate(60, 0)")
-					.call(d3.axisLeft(y));
+					.call(d3.axisLeft(cyScale));
 
 				// Adding LAT points
 				var firstPoints = canvas
@@ -63,10 +58,10 @@
 						which is nothing compared to (2015-1850) = 165 years.
 						*/
 						const parseTime = d3.utcParse("%Y%m%d");
-						return x(parseTime(d.time));
+						return cxScale(parseTime(d.time));
 					})
 					.attr("cy", function(d, i) {
-						return y(+d.LAT);
+						return cyScale(+d.LAT);
 					})
 					.attr("r", function(d, i) {
 						return (+d.LATU * 3.5);
@@ -87,10 +82,10 @@
 						which is nothing compared to (2015-1850) = 165 years.
 						*/
 						const parseTime = d3.utcParse("%Y%m%d");
-						return x(parseTime(d.time));
+						return cxScale(parseTime(d.time));
 					})
 					.attr("cy", function(d, i) {
-						return y(+d.LOAT);
+						return cyScale(+d.LOAT);
 					})
 					.attr("r", function(d, i) {
 						return (+d.LOATU * 3.5);
