@@ -104,10 +104,12 @@
 			}
 
 			function ColorOne() {
-				// var points1 = d3.select("#scatterplot_1").select("#scatterplot").select("#chart1");
-				// const button = 
-
-				// var color1 = d3.scaleLinear()
+				// Grab the LAT points only
+				var points = d3.select("#scatterplot_1").select("#scatterplot").select("#chart1")
+								.selectAll("circle");
+				// Create the color scale
+				var color = d3.scaleLinear([0, 0.75, 1.5], ["red", "white", "green"]);
+				color(points); // Then apply the color scheme to the points.
 			}
 
 			function ColorTwo() {
