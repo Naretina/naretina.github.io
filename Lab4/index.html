@@ -51,6 +51,9 @@
 					.attr("transform", "translate(60, 0)")
 					.call(d3.axisLeft(cyScale));
 
+				// Adding scale to the data points
+				const rScale = d3.scaleSqrt([0, 1.5], [0, 5]);
+
 				// Adding LAT points
 				var firstPoints = canvas
 					.append("g")
@@ -70,7 +73,7 @@
 						return cyScale(+d.LAT);
 					})
 					.attr("r", function(d, i) {
-						return (+d.LATU * 3.5);
+						return rScale(+d.LATU);
 					})
 					.style("fill", "peachpuff")
 					.style("stroke", "orangered");
@@ -94,7 +97,7 @@
 						return cyScale(+d.LOAT);
 					})
 					.attr("r", function(d, i) {
-						return (+d.LOATU * 3.5);
+						return rScale(+d.LOATU);
 					})
 					.style("fill", "royalblue")
 					.style("stroke", "navy");
