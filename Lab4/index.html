@@ -16,9 +16,8 @@
 	<div id="scatterplot_1">
 		<script>
 			async function Scatter() {
-				// Loading in the data for the first plot
+				// Loading in the data for the plot
 				const data = await d3.json("GlobalTemperatures.json");
-				console.log(data);
 
 				// Setting up the canvas and its boundaries
 				const margin = {
@@ -103,14 +102,20 @@
 					.style("stroke", "navy");
 			}
 
-			function ColorOne() {
+			async function ColorOne() {
+				// Must also grab the data in order to correctly plot the colors.
+				const data = await d3.json("GlobalTemperatures.json");
+				console.log(data);
+
 				// Grab the LAT points only
 				var points = d3.select("#scatterplot_1").select("#scatterplot").select("#chart1")
 								.selectAll("circle");
 				// Create the color scale
 				var color = d3.scaleLinear([0, 0.75, 1.5], ["red", "white", "green"]);
 				// Then apply the color scheme to the points.
-				points.style("fill", color);
+				points.style("fill", function(d, i) {
+					return color(+d.LATU);
+				});
 			}
 
 			function ColorTwo() {
