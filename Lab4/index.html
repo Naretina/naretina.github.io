@@ -109,7 +109,8 @@
 								.selectAll("circle");
 				// Create the color scale
 				var color = d3.scaleLinear([0, 0.75, 1.5], ["red", "white", "green"]);
-				color(points); // Then apply the color scheme to the points.
+				// Then apply the color scheme to the points.
+				points.style("fill", color);
 			}
 
 			function ColorTwo() {
