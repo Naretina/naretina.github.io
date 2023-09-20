@@ -110,7 +110,7 @@
 								.selectAll("circle");
 
 				// Create the color scale
-				if Boolean(linear) {
+				if (linear == 0) {
 					var color = d3.scaleQuantize(domain, range);
 				} else {
 					var color = d3.scaleLinear(domain, range);
