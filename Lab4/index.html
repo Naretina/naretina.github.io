@@ -42,7 +42,7 @@
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(cxScale));
-				const xLabel = xAxis
+				const xLabel = canvas
 					.append("text")
 					.attr("text-anchor", "end")
 					.attr("x", canvasWidth)
@@ -55,6 +55,12 @@
 					.append("g")
 					.attr("transform", "translate(60, 0)")
 					.call(d3.axisLeft(cyScale));
+				/* const yLabel = canvas
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("y", 6)
+					.attr("transform", "rotate(-90)")
+					.text("Temperature (in Celsius)"); */
 
 				// Adding scale to the data points
 				const rScale = d3.scaleSqrt([0, 1.5], [0, 4]);
