@@ -42,6 +42,12 @@
 					.append("g")
 					.attr("transform", "translate(0," + canvasHeight + ")")
 					.call(d3.axisBottom(cxScale));
+				const xLabel = xAxis
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("x", canvasWidth)
+					.attr("y", canvasHeight-6)
+					.text("Time (in Years)");
 
 				// Adding the y-axis
 				const cyScale = d3.scaleLinear([0, 18], [canvasHeight, 5]);
@@ -61,10 +67,6 @@
 					.data(data)
 					.join("circle")
 					.attr("cx", function(d, i) {
-						/*
-						The time parsed is behind only by 2 hours,
-						which is nothing compared to (2015-1850) = 165 years.
-						*/
 						const parseTime = d3.utcParse("%Y%m%d");
 						return cxScale(parseTime(d.time));
 					})
@@ -85,10 +87,6 @@
 					.data(data)
 					.join("circle")
 					.attr("cx", function(d, i) {
-						/*
-						The time parsed is behind only by 2 hours,
-						which is nothing compared to (2015-1850) = 165 years.
-						*/
 						const parseTime = d3.utcParse("%Y%m%d");
 						return cxScale(parseTime(d.time));
 					})
