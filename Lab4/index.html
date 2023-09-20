@@ -102,15 +102,20 @@
 					.style("stroke", "navy");
 			}
 
-			async function Color(domain, range) {
+			async function Color(domain, range, linear) {
 				// Must also grab the data in order to correctly plot the colors.
 				const data = await d3.json("GlobalTemperatures.json");
-
 				// Grab the LAT points only
 				var points = d3.select("#scatterplot_1").select("#scatterplot").select("#chart1")
 								.selectAll("circle");
+
 				// Create the color scale
-				var color = d3.scaleLinear(domain, range);
+				if Boolean(linear) {
+					var color = d3.scaleQuantize(domain, range);
+				} else {
+					var color = d3.scaleLinear(domain, range);
+				}
+				
 				// Then apply the color scheme to the points.
 				points.style("fill", function(d, i) {
 					return color(+d.LATU);
@@ -121,9 +126,9 @@
 
 			Scatter();
 		</script>
-		<button id="colormap-button-1" onclick="Color([0, 0.75, 1.5], ['red', 'white', 'green'])">Red to Green</button>
-		<button id="colormap-button-2" onclick="Color([0, 0.75, 1.5], ['d7191c', 'ffffbf', '1a9641'])">Three Colors</button>
-		<button id="colormap-button-3" onclick="Color()">Five Colors</button>
+		<button id="colormap-button-1" onclick="Color([0, 0.75, 1.5], ['red', 'white', 'green'], 1)">Red to Green</button>
+		<button id="colormap-button-2" onclick="Color([0, 0.75, 1.5], ['d7191c', 'ffffbf', '1a9641'], 1)">Three Colors</button>
+		<button id="colormap-button-3" onclick="Color([0, 1.5], ['d7191c', '1a9641'], 0)">Five Colors</button>
 	</div>
 </body>
 </html>
