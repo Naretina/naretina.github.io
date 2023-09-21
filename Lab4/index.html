@@ -130,10 +130,10 @@
 			}
 
 			async function NewGraph(yData, scale, domain, fill, stroke) {
-				// Clear the points and axes.
+				// Clear the points and axes (but not the labels)
 				d3.selectAll("g").remove();
 				// Loading in the data for the plot
-				/* const data = await d3.json("GlobalTemperatures.json");
+				const data = await d3.json("GlobalTemperatures.json");
 
 				// Setting up the canvas and its boundaries
 				const margin = {
@@ -196,7 +196,7 @@
 						return rScale(+d.scale);
 					})
 					.style("fill", fill)
-					.style("stroke", stroke); */
+					.style("stroke", stroke);
 			}
 
 			Scatter();
@@ -207,9 +207,10 @@
 		<button id="colormap-button-3" onclick="Color([0, 1.5], ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'], 0)">Five Colors</button>
 
 		<button id="LAT" onclick="NewGraph('LAT', 'LATU', [0, 20], 'peachpuff', 'orangered')">
-			Land Average Temperature values</button>
+			Land Average Temperature</button>
 		<button id="LAT-cumulative" onclick="NewGraph('LOAT', 'LOATU', [10, 20], 'royalblue', 'navy')">
-			Land & Ocean Average Temperature values</button>
+			Land & Ocean Average Temperature</button>
+		<!-- Refresh the page in order to get the original graph back.-->
 	</div>
 </body>
 </html>
