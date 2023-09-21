@@ -129,7 +129,7 @@
 				points.style("stroke-width", 0.5);
 			}
 
-			async function NewGraph(yData, scale, domain, fill, stroke) {
+			async function NewGraph(yData, domain, fill, stroke) {
 				// Clear the points and axes (but not the labels)
 				d3.selectAll("g").remove();
 				// Loading in the data for the plot
@@ -179,24 +179,45 @@
 				const rScale = d3.scaleSqrt([0, 1.5], [0, 4]);
 
 				// Adding data points
-				var firstPoints = canvas
-					.append("g")
-					.attr("id", "chart1")
-					.selectAll("dot")
-					.data(data)
-					.join("circle")
-					.attr("cx", function(d, i) {
-						const parseTime = d3.utcParse("%Y%m%d");
-						return cxScale(parseTime(d.time));
-					})
-					.attr("cy", function(d, i) {
-						return cyScale(+d.yData);
-					})
-					.attr("r", function(d, i) {
-						return rScale(+d.scale);
-					})
-					.style("fill", fill)
-					.style("stroke", stroke);
+				if (yData == 'LAT') {
+					var points = canvas
+						.append("g")
+						.attr("id", "chart1")
+						.selectAll("dot")
+						.data(data)
+						.join("circle")
+						.attr("cx", function(d, i) {
+							const parseTime = d3.utcParse("%Y%m%d");
+							return cxScale(parseTime(d.time));
+						})
+						.attr("cy", function(d, i) {
+							return cyScale(+d.LAT);
+						})
+						.attr("r", function(d, i) {
+							return rScale(+d.LATU);
+						})
+						.style("fill", fill)
+						.style("stroke", stroke);
+				} else {
+					var points = canvas
+						.append("g")
+						.attr("id", "chart1")
+						.selectAll("dot")
+						.data(data)
+						.join("circle")
+						.attr("cx", function(d, i) {
+							const parseTime = d3.utcParse("%Y%m%d");
+							return cxScale(parseTime(d.time));
+						})
+						.attr("cy", function(d, i) {
+							return cyScale(+d.LOAT);
+						})
+						.attr("r", function(d, i) {
+							return rScale(+d.LOATU);
+						})
+						.style("fill", fill)
+						.style("stroke", stroke);
+				}
 			}
 
 			Scatter();
@@ -206,9 +227,9 @@
 		<button id="colormap-button-2" onclick="Color([0, 0.75, 1.5], ['#d7191c', '#ffffbf', '#1a9641'], 1)">Three Colors</button>
 		<button id="colormap-button-3" onclick="Color([0, 1.5], ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'], 0)">Five Colors</button>
 
-		<button id="LAT" onclick="NewGraph('LAT', 'LATU', [0, 20], 'peachpuff', 'orangered')">
+		<button id="LAT" onclick="NewGraph('LAT', [0, 20], 'peachpuff', 'orangered')">
 			Land Average Temperature</button>
-		<button id="LAT-cumulative" onclick="NewGraph('LOAT', 'LOATU', [10, 20], 'royalblue', 'navy')">
+		<button id="LAT-cumulative" onclick="NewGraph('LOAT', [10, 20], 'royalblue', 'navy')">
 			Land & Ocean Average Temperature</button>
 		<!-- Refresh the page in order to get the original graph back.-->
 	</div>
