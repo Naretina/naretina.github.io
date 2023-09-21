@@ -130,8 +130,8 @@
 			}
 
 			async function NewGraph(yData, scale, domain, fill, stroke) {
-				// Clear the svgs to make a new one.
-				d3.select(svg).selectAll("*").remove();
+				// Clear the points and axes.
+				d3.selectAll("g").remove();
 				// Loading in the data for the plot
 				/* const data = await d3.json("GlobalTemperatures.json");
 
@@ -145,11 +145,7 @@
 				canvasWidth = 500 - margin.left - margin.right,
 				canvasHeight = 500 - margin.top - margin.bottom;
 
-				const canvas = d3
-					.select("#scatterplot_1")
-					.append("svg")
-					.attr("id", "scatterplot")
-					.attr("class", "scatter");
+				const canvas = d3.select("#scatterplot_1").select("#scatterplot");
 
 				// Adding the x-axis
 				const cxScale = d3.scaleTime([new Date("1850-01-01"), new Date("2015-12-01")],
