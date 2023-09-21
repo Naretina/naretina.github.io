@@ -202,16 +202,16 @@
 					.style("fill", fill)
 					.style("stroke", stroke); */
 			}
+			Scatter();
 		</script>
 
 		<button id="colormap-button-1" onclick="Color([0, 0.75, 1.5], ['red', 'white', 'green'], 1)">Red to Green</button>
 		<button id="colormap-button-2" onclick="Color([0, 0.75, 1.5], ['#d7191c', '#ffffbf', '#1a9641'], 1)">Three Colors</button>
 		<button id="colormap-button-3" onclick="Color([0, 1.5], ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'], 0)">Five Colors</button>
 
-		<button onclick="Scatter()">LAT & LOAT</button>
-		<button id="LAT" onclick="NewGraph(LAT, LATU, [0, 20], "peachpuff", "orangered")">
+		<button id="LAT" onclick="NewGraph(LAT, LATU, [0, 20], 'peachpuff', 'orangered')">
 			Land Average Temperature values</button>
-		<button id="LAT-cumulative" onclick="NewGraph(LOAT, LOATU, [10, 20], "royalblue", "navy")">
+		<button id="LAT-cumulative" onclick="NewGraph(LOAT, LOATU, [10, 20], 'royalblue', 'navy')">
 			Land & Ocean Average Temperature values</button>
 	</div>
 </body>
