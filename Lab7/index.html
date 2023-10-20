@@ -1,1 +1,238 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+	.scatter {
+		width: 500px;
+		height: 500px;
+	}
+	</style>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<title>Interactive D3 Scatterplots</title>
+</head>
+<body>
+	<div id="scatterplot_1">
+		<script>
+			async function Scatter() {
+				// Loading in the data for the plot
+				const data = await d3.json("GlobalTemperatures.json");
+
+				// Setting up the canvas and its boundaries
+				const margin = {
+					top: 30,
+					right: 10,
+					bottom: 30,
+					left: 60
+				},
+				canvasWidth = 500 - margin.left - margin.right,
+				canvasHeight = 500 - margin.top - margin.bottom;
+
+				const canvas = d3
+					.select("#scatterplot_1")
+					.append("svg")
+					.attr("id", "scatterplot")
+					.attr("class", "scatter");
+
+				// Adding the x-axis
+				const cxScale = d3.scaleTime([new Date("1850-01-01"), new Date("2015-12-01")],
+												[60, canvasWidth+60]);
+				const xAxis = canvas
+					.append("g")
+					.attr("transform", "translate(0," + canvasHeight + ")")
+					.call(d3.axisBottom(cxScale));
+				const xLabel = canvas
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("x", canvasWidth)
+					.attr("y", canvasHeight-6)
+					.text("Time (in Years)");
+
+				// Adding the y-axis
+				const cyScale = d3.scaleLinear([0, 18], [canvasHeight, 5]);
+				const yAxis = canvas
+					.append("g")
+					.attr("transform", "translate(60, 0)")
+					.call(d3.axisLeft(cyScale));
+				const yLabel = canvas
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("y", 6)
+					.attr("dy", ".75em")
+					.attr("transform", "rotate(-90)")
+					.text("Temperature (in Celsius)");
+
+				// Adding scale to the data points
+				const rScale = d3.scaleSqrt([0, 1.5], [0, 4]);
+
+				// Adding LAT points
+				var firstPoints = canvas
+					.append("g")
+					.attr("id", "chart1")
+					.selectAll("dot")
+					.data(data)
+					.join("circle")
+					.attr("cx", function(d, i) {
+						const parseTime = d3.utcParse("%Y%m%d");
+						return cxScale(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return cyScale(+d.LAT);
+					})
+					.attr("r", function(d, i) {
+						return rScale(+d.LATU);
+					})
+					.style("fill", "peachpuff")
+					.style("stroke", "orangered");
+
+				// Adding LOAT points
+				var secondPoints = canvas
+					.append("g")
+					.attr("id", "chart3")
+					.selectAll("dot")
+					.data(data)
+					.join("circle")
+					.attr("cx", function(d, i) {
+						const parseTime = d3.utcParse("%Y%m%d");
+						return cxScale(parseTime(d.time));
+					})
+					.attr("cy", function(d, i) {
+						return cyScale(+d.LOAT);
+					})
+					.attr("r", function(d, i) {
+						return rScale(+d.LOATU);
+					})
+					.style("fill", "royalblue")
+					.style("stroke", "navy");
+			}
+
+			async function Color(domain, range, linear) {
+				// Must also grab the data in order to correctly plot the colors.
+				const data = await d3.json("GlobalTemperatures.json");
+				// Grab the LAT points only
+				var points = d3.select("#scatterplot_1").select("#scatterplot").select("#chart1")
+								.selectAll("circle");
+
+				// Create the color scale
+				if (linear == 0) {
+					var color = d3.scaleQuantize(domain, range);
+				} else {
+					var color = d3.scaleLinear(domain, range);
+				}
+				
+				// Then apply the color scheme to the points.
+				points.style("fill", function(d, i) {
+					return color(+d.LATU);
+				});
+				points.style("stroke", "black");
+				points.style("stroke-width", 0.5);
+			}
+
+			async function NewGraph(yData, domain, fill, stroke) {
+				// Clear the points and axes (but not the labels)
+				d3.selectAll("g").remove();
+				// Loading in the data for the plot
+				const data = await d3.json("GlobalTemperatures.json");
+
+				// Setting up the canvas and its boundaries
+				const margin = {
+					top: 30,
+					right: 10,
+					bottom: 30,
+					left: 60
+				},
+				canvasWidth = 500 - margin.left - margin.right,
+				canvasHeight = 500 - margin.top - margin.bottom;
+
+				const canvas = d3.select("#scatterplot_1").select("#scatterplot");
+
+				// Adding the x-axis
+				const cxScale = d3.scaleTime([new Date("1850-01-01"), new Date("2015-12-01")],
+												[60, canvasWidth+60]);
+				const xAxis = canvas
+					.append("g")
+					.attr("transform", "translate(0," + canvasHeight + ")")
+					.call(d3.axisBottom(cxScale));
+				const xLabel = canvas
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("x", canvasWidth)
+					.attr("y", canvasHeight-6)
+					.text("Time (in Years)");
+
+				// Adding the y-axis
+				const cyScale = d3.scaleLinear(domain, [canvasHeight, 5]);
+				const yAxis = canvas
+					.append("g")
+					.attr("transform", "translate(60, 0)")
+					.call(d3.axisLeft(cyScale));
+				const yLabel = canvas
+					.append("text")
+					.attr("text-anchor", "end")
+					.attr("y", 6)
+					.attr("dy", ".75em")
+					.attr("transform", "rotate(-90)")
+					.text("Temperature (in Celsius)");
+
+				// Adding scale to the data points
+				const rScale = d3.scaleSqrt([0, 1.5], [0, 4]);
+
+				// Adding data points
+				if (yData == 'LAT') {
+					var points = canvas
+						.append("g")
+						.attr("id", "chart1")
+						.selectAll("dot")
+						.data(data)
+						.join("circle")
+						.attr("cx", function(d, i) {
+							const parseTime = d3.utcParse("%Y%m%d");
+							return cxScale(parseTime(d.time));
+						})
+						.attr("cy", function(d, i) {
+							return cyScale(+d.LAT);
+						})
+						.attr("r", function(d, i) {
+							return rScale(+d.LATU);
+						})
+						.style("fill", fill)
+						.style("stroke", stroke);
+				} else {
+					var points = canvas
+						.append("g")
+						.attr("id", "chart1")
+						.selectAll("dot")
+						.data(data)
+						.join("circle")
+						.attr("cx", function(d, i) {
+							const parseTime = d3.utcParse("%Y%m%d");
+							return cxScale(parseTime(d.time));
+						})
+						.attr("cy", function(d, i) {
+							return cyScale(+d.LOAT);
+						})
+						.attr("r", function(d, i) {
+							return rScale(+d.LOATU);
+						})
+						.style("fill", fill)
+						.style("stroke", stroke);
+				}
+			}
+
+			Scatter();
+		</script>
+
+		<button id="colormap-button-1" onclick="Color([0, 0.75, 1.5], ['red', 'white', 'green'], 1)">Red to Green</button>
+		<button id="colormap-button-2" onclick="Color([0, 0.75, 1.5], ['#d7191c', '#ffffbf', '#1a9641'], 1)">Three Colors</button>
+		<button id="colormap-button-3" onclick="Color([0, 1.5], ['#d7191c', '#fdae61', '#ffffbf', '#a6d96a', '#1a9641'], 0)">Five Colors</button>
+
+		<button id="LAT" onclick="NewGraph('LAT', [0, 20], 'peachpuff', 'orangered')">
+			Land Average Temperature</button>
+		<button id="LAT-cumulative" onclick="NewGraph('LOAT', [10, 20], 'royalblue', 'navy')">
+			Land & Ocean Average Temperature</button>
+		<!-- Refresh the page in order to get the original graph back.-->
+	</div>
+</body>
+</html>
