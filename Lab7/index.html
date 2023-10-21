@@ -156,17 +156,20 @@
 				}
 
 				if (range.length == 3) { // continuous
-					
+					legend.append("rect").attr("class", "Alegend")
+						.attr("x", 40).attr("y", 470).attr("width", 212).attr("y", 470)
+						.style("fill", d3.piecewise(range))
+						.style("stroke", "black").style("stroke-width", 0.5);
 				} else { // Other length is 5 and categorical
-					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // Okay, wait, what IS the range?
+					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // TODO: Wait, what IS the range?
 					var size = 10;
 					for (let i = 0; i < range.length; i++) {
 						legend.append("rect").attr("class", "Alegend")
-							.attr("x", 40*(i+1)).attr("y", 465)
+							.attr("x", 40*(i+1)).attr("y", 470)
 							.attr("width", size).attr("height", size)
 							.style("fill", range[i]).style("stroke", "black").style("stroke-width", 0.5);
 						legend.append("text").attr("class", "Alegend")
-							.attr("x", 40*(i+1) + size*1.2).attr("y", 465 + (size-2))
+							.attr("x", 40*(i+1) + size*1.2).attr("y", 470 + (size-2))
 							.attr("font-size", "12px").text("<" + domainExpanded[i]);
 					}
 				}
