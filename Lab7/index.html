@@ -147,9 +147,12 @@
 				// Clear all elements in #legend (if it exists)
 				var legend = document.getElementById("legend");
 				if (legend) {
-					console.log("Found element #legend. Can access.");
+					while (legend.firstChild) {
+						legend.removeChild(legend.lastChild);
+					}
 				} else {
-					console.log("Didnt find it. Try something else.");
+					legend = d3.select("#scatterplot_1").select("#scatterplot")
+								.append("g").attr("id", "legend");
 				}
 			}
 
