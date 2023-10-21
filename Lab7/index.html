@@ -147,15 +147,17 @@
 				// Clear all elements in #legend (if it exists)
 				var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 				if (legend) {
-					while (legend.firstChild) {
+					/*while (legend.firstChild) {
 						legend.removeChild(legend.lastChild);
-					}
+					}*/
+					console.log("I can see that there is already a legend here that must be deleted!");
 				} else {
-					legend = d3.select("#scatterplot_1").select("#scatterplot")
-								.append("g").attr("id", "legend");
+					/*legend = d3.select("#scatterplot_1").select("#scatterplot")
+								.append("g").attr("id", "legend"); */
+					console.log("What legend? (Wrong!)");
 				}
 
-				if (range.length == 3) { // continuous
+				/*if (range.length == 3) { // continuous
 					
 				} else { // Other length is 5 and categorical
 					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // Okay, wait, what IS the range?
@@ -167,7 +169,7 @@
 						legend.append("text").attr("x", 40*(i+1) + size*1.2).attr("y", 465 + (size-2))
 							.attr("font-size", "12px").text("<" + domainExpanded[i]);
 					}
-				}
+				}*/
 			}
 
 			async function NewGraph(yData, domain, fill, stroke) {
