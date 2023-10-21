@@ -145,7 +145,7 @@
 				points.style("stroke-width", 0.5);
 
 				// Clear all elements in #legend (if it exists)
-				var legend = document.getElementById("legend");
+				var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 				if (legend) {
 					while (legend.firstChild) {
 						legend.removeChild(legend.lastChild);
