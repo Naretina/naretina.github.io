@@ -113,8 +113,12 @@
 				legend.append("rect").attr("x", 60).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "peachpuff").style("stroke", "orangered");
-				legend.append("text").attr("x", 60 + size*1.2).attr("y", 465+size)
+				legend.append("text").attr("x", 60 + size*1.2).attr("y", 465 + (size-2))
 					.text("Land Average Temperature");
+				legend.append("rect").attr("x", 120).attr("y", 465)
+					.style("fill", "royalblue").style("stroke", "navy");
+				legend.append("text").attr("x", 120 + size*1.2).attr("y", 465 + (size-2))
+					.text("Land & Ocean Average Temperature");
 			}
 
 			async function Color(domain, range, linear) {
