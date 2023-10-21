@@ -109,16 +109,16 @@
 
 				// Adding original legend of peachpuff & royalblue
 				const legend = canvas.append("g").attr("id", "legend");
-				var size = 20;
+				var size = 15;
 				legend.append("rect").attr("x", 40).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "peachpuff").style("stroke", "orangered");
 				legend.append("text").attr("x", 40 + size*1.2).attr("y", 465 + (size-5))
 					.text("Land Average Temperature");
-				legend.append("rect").attr("x", 270).attr("y", 465)
+				legend.append("rect").attr("x", 250).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "royalblue").style("stroke", "navy");
-				legend.append("text").attr("x", 270 + size*1.2).attr("y", 465 + (size-5))
+				legend.append("text").attr("x", 250 + size*1.2).attr("y", 465 + (size-5))
 					.text("Land & Ocean Average Temperature");
 			}
 
