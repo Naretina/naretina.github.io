@@ -9,9 +9,6 @@
 		width: 500px;
 		height: 500px;
 	}
-	.o-label {
-		font-size: 12px;
-	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<title>D3 Legends</title>
@@ -118,12 +115,12 @@
 					.attr("width", size).attr("height", size)
 					.style("fill", "peachpuff").style("stroke", "orangered");
 				legend.append("text").attr("x", 60 + size*1.2).attr("y", 465 + (size-2))
-					.attr("class", "o-label").text("Land Average Temperature");
+					.attr("font-size", "12px").text("Land Average Temperature");
 				legend.append("rect").attr("x", 250).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "royalblue").style("stroke", "navy");
 				legend.append("text").attr("x", 250 + size*1.2).attr("y", 465 + (size-2))
-					.attr("class", "o-label").text("Land & Ocean Average Temperature");
+					.attr("font-size", "12px").text("Land & Ocean Average Temperature");
 			}
 
 			async function Color(domain, range, linear) {
