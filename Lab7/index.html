@@ -111,15 +111,17 @@
 				// Using https://d3-graph-gallery.com/graph/custom_legend.html for reference
 				const legend = canvas.append("g").attr("id", "legend");
 				var size = 15;
-				legend.append("rect").attr("x", 60).attr("y", 465)
+				legend.append("rect").attr("class", "Alegend").attr("x", 60).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "peachpuff").style("stroke", "orangered");
-				legend.append("text").attr("x", 60 + size*1.2).attr("y", 465 + (size-2))
+				legend.append("text").attr("class", "Alegend")
+					.attr("x", 60 + size*1.2).attr("y", 465 + (size-2))
 					.attr("font-size", "12px").text("Land Average Temperature");
-				legend.append("rect").attr("x", 250).attr("y", 465)
+				legend.append("rect").attr("class", "Alegend").attr("x", 250).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "royalblue").style("stroke", "navy");
-				legend.append("text").attr("x", 250 + size*1.2).attr("y", 465 + (size-2))
+				legend.append("text").attr("class", "Alegend")
+					.attr("x", 250 + size*1.2).attr("y", 465 + (size-2))
 					.attr("font-size", "12px").text("Land & Ocean Average Temperature");
 			}
 
@@ -147,29 +149,27 @@
 				// Clear all elements in #legend (if it exists)
 				var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 				if (legend) {
-					/*while (legend.firstChild) {
-						legend.removeChild(legend.lastChild);
-					}*/
-					console.log("I can see that there is already a legend here that must be deleted!");
+					d3.selectAll('.Alegend').remove();
 				} else {
-					/*legend = d3.select("#scatterplot_1").select("#scatterplot")
-								.append("g").attr("id", "legend"); */
-					console.log("What legend? (Wrong!)");
+					legend = d3.select("#scatterplot_1").select("#scatterplot")
+								.append("g").attr("id", "legend");
 				}
 
-				/*if (range.length == 3) { // continuous
+				if (range.length == 3) { // continuous
 					
 				} else { // Other length is 5 and categorical
 					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // Okay, wait, what IS the range?
 					var size = 10;
 					for (let i = 0; i < range.length; i++) {
-						legend.append("rect").attr("x", 40*(i+1)).attr("y", 465)
+						legend.append("rect").attr("class", "Alegend")
+							.attr("x", 40*(i+1)).attr("y", 465)
 							.attr("width", size).attr("height", size)
 							.style("fill", range[i]).style("stroke", "black").style("stroke-width", 0.5);
-						legend.append("text").attr("x", 40*(i+1) + size*1.2).attr("y", 465 + (size-2))
+						legend.append("text").attr("class", "Alegend")
+							.attr("x", 40*(i+1) + size*1.2).attr("y", 465 + (size-2))
 							.attr("font-size", "12px").text("<" + domainExpanded[i]);
 					}
-				}*/
+				}
 			}
 
 			async function NewGraph(yData, domain, fill, stroke) {
