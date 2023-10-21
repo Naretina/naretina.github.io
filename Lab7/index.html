@@ -9,9 +9,12 @@
 		width: 500px;
 		height: 500px;
 	}
+	.o-label {
+		font-size: 12px;
+	}
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
-	<title>Interactive D3 Scatterplots</title>
+	<title>D3 Legends</title>
 </head>
 <body>
 	<div id="scatterplot_1">
@@ -108,18 +111,19 @@
 					.style("stroke", "navy");
 
 				// Adding original legend of peachpuff & royalblue
+				// Using https://d3-graph-gallery.com/graph/custom_legend.html for reference
 				const legend = canvas.append("g").attr("id", "legend");
 				var size = 15;
 				legend.append("rect").attr("x", 40).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "peachpuff").style("stroke", "orangered");
 				legend.append("text").attr("x", 40 + size*1.2).attr("y", 465 + (size-5))
-					.text("Land Average Temperature");
+					.attr("class", "o-label").text("Land Average Temperature");
 				legend.append("rect").attr("x", 250).attr("y", 465)
 					.attr("width", size).attr("height", size)
 					.style("fill", "royalblue").style("stroke", "navy");
 				legend.append("text").attr("x", 250 + size*1.2).attr("y", 465 + (size-5))
-					.text("Land & Ocean Average Temperature");
+					.attr("class", "o-label").text("Land & Ocean Average Temperature");
 			}
 
 			async function Color(domain, range, linear) {
@@ -142,6 +146,9 @@
 				});
 				points.style("stroke", "black");
 				points.style("stroke-width", 0.5);
+
+				// Create the corresponding legend (and remove the original legend if it exists)
+				// d3.select("#legend").remove();
 			}
 
 			async function NewGraph(yData, domain, fill, stroke) {
