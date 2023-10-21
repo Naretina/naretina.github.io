@@ -106,6 +106,14 @@
 					})
 					.style("fill", "royalblue")
 					.style("stroke", "navy");
+
+				// Adding original legend of peachpuff & royalblue
+				const legend = canvas.append("g").attr("id", "legend");
+				var size = 20;
+				legend.append("rect").attr("x", 470).attr("y", 440)
+					.attr("width", size).attr("height", size)
+					.style("fill", "peachpuff").style("stroke", "orangered");
+				legend.append("text").attr("x", 470).attr("y", 440 + (size/2)).text("Land Average Temperature");
 			}
 
 			async function Color(domain, range, linear) {
