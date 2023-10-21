@@ -144,8 +144,13 @@
 				points.style("stroke", "black");
 				points.style("stroke-width", 0.5);
 
-				// Create the corresponding legend (and remove the original legend if it exists)
-				// d3.select("#legend").remove();
+				// Clear all elements in #legend (if it exists)
+				var legend = document.getElementById("legend");
+				if (legend) {
+					console.log("Found element #legend. Can access.");
+				} else {
+					console.log("Didnt find it. Try something else.");
+				}
 			}
 
 			async function NewGraph(yData, domain, fill, stroke) {
