@@ -158,14 +158,14 @@
 				if (range.length == 3) { // continuous
 					
 				} else { // Other length is 5 and categorical
-					var domainExpanded = [0, 0.3, 0.6, 0.9, 1.2, 1.5] // Okay, wait, what IS the range?
+					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // Okay, wait, what IS the range?
 					var size = 10;
 					for (let i = 0; i < range.length; i++) {
 						legend.append("rect").attr("x", 40*(i+1)).attr("y", 465)
 							.attr("width", size).attr("height", size)
-							.style("fill", range[0]).style("stroke", "black").style("stroke-width", 0.5);
+							.style("fill", range[i]).style("stroke", "black").style("stroke-width", 0.5);
 						legend.append("text").attr("x", 40*(i+1) + size*1.2).attr("y", 465 + (size-2))
-							.attr("font-size", "12px").text("something");
+							.attr("font-size", "12px").text("<" + domainExpanded[i]);
 					}
 				}
 			}
