@@ -140,6 +140,7 @@
 				// Create the color scale
 				if (linear == 0) {
 					var color = d3.scaleQuantize(domain, range);
+					console.log(color.thresholds()); // This will be deleted, but I want to see the range
 				} else {
 					var color = d3.scaleLinear(domain, range);
 				}
