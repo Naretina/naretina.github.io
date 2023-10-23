@@ -125,6 +125,10 @@
 				legend.append("text").attr("class", "Alegend")
 					.attr("x", 250 + size*1.2).attr("y", 465 + (size-2))
 					.attr("font-size", "12px").text("Land & Ocean Average Temperature");
+
+				// Adding an extra legend for the continuous values (not shown here):
+				const cLegend = canvas.append("g").attr("id", "legend")
+					.attr("transform", "translate(40, 465)");
 			}
 
 			async function Color(domain, range, linear) {
@@ -151,10 +155,11 @@
 				// Clear all elements in #Alegend (if any exist)
 				d3.selectAll('.Alegend').remove();
 
-				var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 				if (range.length == 3) { // continuous
-					legend.append(Legend(color), {title: "Uncertainty"});
+					var cLegend = d3.select("#scatterplot_1").select("#scatterplot").select("#cLegend");
+					cLegend.append(Legend(color), {title: "Uncertainty"}).attr("class", "Alegend");
 				} else { // Other length is 5 and categorical
+					var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // TODO: Wait, what IS the range?
 					var size = 10;
 					for (let i = 0; i < range.length; i++) {
@@ -166,8 +171,8 @@
 							.attr("x", 40*(i+1) + size*1.2).attr("y", 470 + (size-2))
 							.attr("font-size", "12px").text("<" + domainExpanded[i]);
 					}
-					legend.append("text").attr("class", "Alegend").attr("x", 212).attr("y", 470)
-						.attr("font-size", "12px").text("Uncertainty");
+					legend.append("text").attr("class", "Alegend").attr("x", 250).attr("y", 470 + size)
+						.attr("font-size", "14px").text("Uncertainty");
 				}
 			}
 
@@ -261,8 +266,10 @@
 						.style("stroke", stroke);
 				}
 
-				// Make sure to add the legend that way it can be reused later (not needed here though)
+				// Make sure to add the legends that way they can be reused later (not needed here though)
 				const legend = canvas.append("g").attr("id", "legend");
+				const cLegend = canvas.append("g").attr("id", "cLegend")
+					.attr("transform", "translate(40, 465)");
 			}
 
 			Scatter();
