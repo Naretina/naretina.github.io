@@ -140,7 +140,6 @@
 				// Create the color scale
 				if (linear == 0) {
 					var color = d3.scaleQuantize(domain, range);
-					console.log(color.thresholds()); // This will be deleted, but I want to see the range
 				} else {
 					var color = d3.scaleLinear(domain, range);
 				}
@@ -160,7 +159,7 @@
 					document.getElementById("cLegend").appendChild(cLegend).classList.add("Alegend");
 				} else { // Other length is 5 and categorical
 					var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
-					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // TODO: Wait, what IS the range?
+					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5];
 					var size = 10;
 					for (let i = 0; i < range.length; i++) {
 						legend.append("rect").attr("class", "Alegend")
