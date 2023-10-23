@@ -12,7 +12,6 @@
 	</style>
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<script src="legend.js"></script>
-	<script src="swatches.js"></script>
 	<title>D3 Legends</title>
 </head>
 <body>
@@ -128,7 +127,7 @@
 
 				// Adding an extra legend for the continuous values (not shown here):
 				const cLegend = canvas.append("g").attr("id", "cLegend")
-					.attr("transform", "translate(40, 465)");
+					.attr("transform", "translate(40, 455)");
 			}
 
 			async function Color(domain, range, linear) {
@@ -269,7 +268,7 @@
 				// Make sure to add the legends that way they can be reused later (not needed here though)
 				const legend = canvas.append("g").attr("id", "legend");
 				const cLegend = canvas.append("g").attr("id", "cLegend")
-					.attr("transform", "translate(40, 465)");
+					.attr("transform", "translate(40, 455)");
 			}
 
 			Scatter();
