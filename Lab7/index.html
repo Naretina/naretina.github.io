@@ -157,7 +157,7 @@
 
 				if (range.length == 3) { // continuous
 					var cLegend = d3.select("#scatterplot_1").select("#scatterplot").select("#cLegend");
-					cLegend.append(Legend(color), {title: "Uncertainty"}).attr("class", "Alegend");
+					cLegend.append(Legend(color, {title: "Uncertainty"})).attr("class", "Alegend");
 				} else { // Other length is 5 and categorical
 					var legend =  d3.select("#scatterplot_1").select("#scatterplot").select("#legend");
 					var domainExpanded = [0.3, 0.6, 0.9, 1.2, 1.5] // TODO: Wait, what IS the range?
