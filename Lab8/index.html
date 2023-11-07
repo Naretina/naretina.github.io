@@ -19,6 +19,9 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
             //data source: https://github.com/codeforgermany/click_that_hood/blob/master/public/data/columbus.geojson
             var data = await d3.json("columbus.geojson");
             console.log(data);
+            // Random numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
+            var info = await d3.json("specializedCovid.json")
+            console.log(info);
 
             //step 2: create the SVG 
             var width = 600,
@@ -38,8 +41,6 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
 
             var geoGenerator = d3.geoPath()
                 .projection(projection);
-
-            //console.log(geoGenerator(data));
 
             //psuedo color mapping
             const colorScale = d3.scaleSequential()
@@ -66,23 +67,6 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                 })
                 .on("mouseleave", function (event, d) {
                     d3.select(this).attr("fill", colorScale(d.properties.name.length));
-                })
-
-            //add bubbles on the map
-            var points = svg.append('g')
-                .selectAll('dot')
-                .data(data.features)
-                .join('circle')
-                .attr('cx', function (d, i) {
-                    return geoGenerator.centroid(d)[0];
-                })
-                .attr('cy', function (d, i) {
-                    return geoGenerator.centroid(d)[1];
-                })
-                .attr('r', 4)
-                .style("opacity", 0.7)
-                .style('fill', function (d, i) {
-                    return "red"
                 })
 
         }
