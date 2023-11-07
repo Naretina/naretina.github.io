@@ -21,7 +21,7 @@
   { "County": "Bexley", "Cases": 56850, "Deaths": 303},
   { "County": "Near East", "Cases": 25317, "Deaths": 295},
   { "County": "Downtown", "Cases": 47966, "Deaths": 463},
-  { "County": "McKinley Avenue Corridor", "Cases": , "Deaths": 156},
+  { "County": "McKinley Avenue Corridor", "Cases": 4284, "Deaths": 59},
   { "County": "Franklinton", "Cases": 9527, "Deaths": 133},
   { "County": "Brewery", "Cases": 371664, "Deaths": 2831},
   { "County": "Southside", "Cases": 12830, "Deaths": 185},
