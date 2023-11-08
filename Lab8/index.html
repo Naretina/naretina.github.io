@@ -67,6 +67,7 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                     d3.select(this).attr("fill", '#f8f7cc');
                 })
                 .on("mouseleave", function (event, d) {
+                    console.log(colorScale(d.properties.name.length)); // TEST what this outputs
                     d3.select(this).attr("fill", colorScale(d.properties.name.length));
                 })
 
