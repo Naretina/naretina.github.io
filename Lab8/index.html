@@ -23,7 +23,7 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
             // Dummy numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
             var info = await d3.json("specializedCovid.json")
             console.log(info);
-            console.log(info.County);
+            console.log(info.County[1]);
 
             //step 2: create the SVG 
             /*var width = 600,
