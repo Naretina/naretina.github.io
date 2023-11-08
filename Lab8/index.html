@@ -28,10 +28,10 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                     console.log(key+"="+obj[key])
                 }
             }*/
-            console.log(info[1]["County"]);
+            //console.log(info[1]["County"]);
 
             //step 2: create the SVG 
-            /*var width = 600,
+            var width = 600,
                 height = 600;
 
             var svg = d3.select("#chart")
@@ -52,7 +52,7 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
             //psuedo color mapping
             const colorScale = d3.scaleSequential()
                 .interpolator(d3.interpolateBlues)
-                .domain([1, 30])
+                .domain([0, 3000]);
 
             // Draw the map
             var map = svg.append("g")
@@ -66,15 +66,31 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                 .style("stroke", "#aaa")
                 .attr("opacity", 0.7)
                 .attr("fill", function (d) {
-                    return colorScale(d.properties.name.length);
+                    var index = 0;
+                    for (var i = 0; i < info.length; i++) {
+                        if (info[i]["County"] == d.properties.name) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    return colorScale(info[index]["Deaths"]);
                 })
                 .on("mouseover", function (event, d) {
                     console.log(d.properties.name);
                     d3.select(this).attr("fill", '#f8f7cc');
                 })
                 .on("mouseleave", function (event, d) {
-                    d3.select(this).attr("fill", colorScale(d.properties.name.length));
-                })*/
+                    d3.select(this).attr("fill", function (d) {
+                        var index = 0;
+                        for (var i = 0; i < info.length; i++) {
+                            if (info[i]["County"] == d.properties.name) {
+                                index = i;
+                                break;
+                            }
+                        }
+                        return colorScale(info[index]["Deaths"]);
+                    })
+                });
 
         }
 
