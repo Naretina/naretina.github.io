@@ -20,12 +20,10 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
             //data source: https://github.com/codeforgermany/click_that_hood/blob/master/public/data/columbus.geojson
             var data = await d3.json("columbus.geojson");
             console.log(data);
-            // Random numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
+            // Dummy numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
             var info = await d3.json("specializedCovid.json")
             console.log(info);
-            for (var i = 0; i < info.length; i++) {
-                console.log(data[i][0]);
-            }
+            console.log(info.Country);
 
             //step 2: create the SVG 
             /*var width = 600,
