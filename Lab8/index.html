@@ -7,31 +7,34 @@
 	<title>D3 Geospatial Map</title>
 </head>
 <body>
-<!-- Create your own geomap or dashboard. This implementation does not have to be the same as your
-sketches from Task 2. It doesn't need to include multiple data attributes -
-having the COVID19 # is sufficient. Also replicating the graphs is okay. The point here is to practice
-to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
 <!-- This data does NOT match what I did for tasks one and two at all. Treat them more as practice. -->
     <div id="chart" style="width: 600px; height: 600px;"></div>
     <script>
         async function program() {
 
-            //step 1: load the dataset
-            //data source: https://github.com/codeforgermany/click_that_hood/blob/master/public/data/columbus.geojson
+            //step 1: load the datasets
+            // data source: https://github.com/codeforgermany/click_that_hood/blob/master/public/data/columbus.geojson
             var data = await d3.json("columbus.geojson");
             console.log(data);
             // Dummy numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
-            var info = await d3.json("specializedCovid.json")
-            /*for (var i = 0; i < info.length; i++) {
-                var obj = info[i];
-                for (var key in obj) {
-                    console.log(key+"="+obj[key])
+            var info = await d3.json("specializedCovid.json");
+
+            // TO BE DELETED: What are the min & max of the percentage of people who died from Covid?
+            var min = info[0]["Deaths"]/info[0]["Cases"];
+            var max = info[0]["Deaths"]/info[0]["Cases"];
+            for (var i = 1; i < info.length; i++) {
+                var thisVar = info[i]["Deaths"]/info[i]["Cases"];
+                if (thisVar < min) {
+                    min = thisVar;
+                } else if (thisVar > max) {
+                    max = thisVar;
                 }
-            }*/
-            //console.log(info[1]["County"]);
+            }
+            console.log(min);
+            console.log(max);
 
             //step 2: create the SVG 
-            var width = 600,
+            /* var width = 600,
                 height = 600;
 
             var svg = d3.select("#chart")
@@ -66,6 +69,7 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                 .style("stroke", "#aaa")
                 .attr("opacity", 0.7)
                 .attr("fill", function (d) {
+                    // Referenced https://stackoverflow.com/questions/20005059/how-to-iterate-over-data-in-json-file-using-d3-javascript
                     var index = 0;
                     for (var i = 0; i < info.length; i++) {
                         if (info[i]["County"] == d.properties.name) {
@@ -90,7 +94,7 @@ to see how to do this in D3 (or Python, or Chart.js, or Tableau) -->
                         }
                         return colorScale(info[index]["Deaths"]);
                     })
-                });
+                });*/
 
         }
 
