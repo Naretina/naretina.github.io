@@ -35,11 +35,11 @@
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
 
             var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                .attr("x", 100).attr("y", 550).text("County:");
+                .attr("x", 100).attr("y", 575).text("County:");
             var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                .attr("x", 100).attr("y", 575).text("COVID Cases:");
+                .attr("x", 100).attr("y", 590).text("COVID Cases:");
             var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                .attr("x", 300).attr("y", 575).text("Deaths to COVID:");
+                .attr("x", 300).attr("y", 590).text("Deaths to COVID:");
 
             //step 3: create the geoPath() and specify the projection configurations
             var projection = d3.geoMercator()
@@ -93,11 +93,11 @@
                         }
                     }
                     var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                        .attr("x", 100).attr("y", 550).text("County: " + d.properties.name);
+                        .attr("x", 100).attr("y", 575).text("County: " + d.properties.name);
                     var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                        .attr("x", 100).attr("y", 575).text("COVID Cases: " + info[index]["Cases"]);
+                        .attr("x", 100).attr("y", 590).text("COVID Cases: " + info[index]["Cases"]);
                     var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                        .attr("x", 300).attr("y", 575).text("Deaths to COVID: " + info[index]["Deaths"]);
+                        .attr("x", 300).attr("y", 590).text("Deaths to COVID: " + info[index]["Deaths"]);
                     d3.select(this).attr("fill", '#f8f7cc');
                 })
                 .on("mouseleave", function (event, d) {
@@ -112,13 +112,13 @@
                         }
                         var countyText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
-                            .attr("x", 100).attr("y", 550).text("County:");
+                            .attr("x", 100).attr("y", 575).text("County:");
                         var casesText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
-                            .attr("x", 100).attr("y", 575).text("COVID Cases:");
+                            .attr("x", 100).attr("y", 590).text("COVID Cases:");
                         var deathsText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
-                            .attr("x", 300).attr("y", 575).text("Deaths to COVID:");
+                            .attr("x", 300).attr("y", 590).text("Deaths to COVID:");
                         return colorScale((info[index]["Deaths"]/info[index]["Cases"])*100);
                     })
                 });
