@@ -35,7 +35,7 @@
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
 
             var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                .attr("x", 100).attr("y", 575).text("County:");
+                .attr("x", 100).attr("y", 565).text("County:");
             var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                 .attr("x", 100).attr("y", 590).text("COVID Cases:");
             var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
@@ -93,7 +93,7 @@
                         }
                     }
                     var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
-                        .attr("x", 100).attr("y", 575).text("County: " + d.properties.name);
+                        .attr("x", 100).attr("y", 565).text("County: " + d.properties.name);
                     var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                         .attr("x", 100).attr("y", 590).text("COVID Cases: " + info[index]["Cases"]);
                     var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
@@ -112,7 +112,7 @@
                         }
                         var countyText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
-                            .attr("x", 100).attr("y", 575).text("County:");
+                            .attr("x", 100).attr("y", 565).text("County:");
                         var casesText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
                             .attr("x", 100).attr("y", 590).text("COVID Cases:");
