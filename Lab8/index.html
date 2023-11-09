@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- This data does NOT match what I did for tasks one and two at all. Treat them more as practice. -->
-    <div id="chart" style="width: 600px; height: 600px;"></div>
+    <div id="chart" style="width: 800px; height: 600px;"></div>
     <script>
         async function program() {
 
@@ -19,20 +19,36 @@
             // Dummy numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
             var info = await d3.json("specializedCovid.json");
 
-            //step 2: create the SVG 
+            //step 2: create the SVGs (one for the map, the other for the additional information)
             var width = 600,
                 height = 600;
+            
+            // Create the space for the map
+            const svg = d3.select("#chart").append("svg").attr("id", "map")
+                .attr("width", width).attr("height", height);
 
-            var svg = d3.select("#chart")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
-
-            var title = svg.append("text")
+            const title = svg.append("text")
                 .attr("text-anchor", "end")
                 .attr("x", 550).attr("y", 70)
                 .attr("font-size", "24px")
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
+            
+            // Create the space for the additional information on County, Cases, and Deaths
+            const svg2 = d3.select("#chart").append("svg").attr("id", "info")
+                .attr("width", 200).attr("height", height);
+
+            var countyText = svg2.append("text").attr("id", "infobit")
+                .attr("text-anchor", "end")
+                .attr("x", 50).attr("y", 200)
+                .text("County:");
+            var casesText = svg2.append("text").attr("id", "infobit")
+                .attr("text-anchor", "end")
+                .attr("x", 50).attr("y", 300)
+                .text("COVID Cases:");
+            var deathsText = svg2.append("text").attr("id", "infobit")
+                .attr("text-anchor", "end")
+                .attr("x", 50).attr("y", 400)
+                .text("Deaths to COVID:");
 
             //step 3: create the geoPath() and specify the projection configurations
             var projection = d3.geoMercator()
