@@ -10,6 +10,18 @@
 <!-- This data does NOT match what I did for tasks one and two at all. Treat them more as practice. -->
     <div id="chart" style="width: 800px; height: 600px;"></div>
     <script>
+        async function find_index(d, info) {
+        // Referenced https://stackoverflow.com/questions/20005059/how-to-iterate-over-data-in-json-file-using-d3-javascript
+            var index = 0;
+            for (var i = 0; i < info.length; i++) {
+                if (info[i]["County"] == d.properties.name) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
         async function program() {
 
             //step 1: load the datasets
@@ -34,18 +46,18 @@
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
             
             // Create the space for the additional information on County, Cases, and Deaths
-            const svg2 = d3.select("#chart").append("svg").attr("id", "info")
+            const svg2 = d3.select("#chart").append("svg")
                 .attr("width", 200).attr("height", height);
 
-            var countyText = svg2.append("text").attr("id", "infobit")
+            var countyText = svg2.append("text").attr("id", "countyBit")
                 .attr("text-anchor", "start")
                 .attr("x", 50).attr("y", 250)
                 .text("County:");
-            var casesText = svg2.append("text").attr("id", "infobit")
+            var casesText = svg2.append("text").attr("id", "casesBit")
                 .attr("text-anchor", "start")
                 .attr("x", 50).attr("y", 300)
                 .text("COVID Cases:");
-            var deathsText = svg2.append("text").attr("id", "infobit")
+            var deathsText = svg2.append("text").attr("id", "deathsBit")
                 .attr("text-anchor", "start")
                 .attr("x", 50).attr("y", 350)
                 .text("Deaths to COVID:");
@@ -76,14 +88,7 @@
                 .style("stroke", "#aaa")
                 .attr("opacity", 0.7)
                 .attr("fill", function (d) {
-                    // Referenced https://stackoverflow.com/questions/20005059/how-to-iterate-over-data-in-json-file-using-d3-javascript
-                    var index = 0;
-                    for (var i = 0; i < info.length; i++) {
-                        if (info[i]["County"] == d.properties.name) {
-                            index = i;
-                            break;
-                        }
-                    }
+                    index = find_index(d, info);
                     return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                 })
                 .on("mouseover", function (event, d) {
@@ -92,13 +97,7 @@
                 })
                 .on("mouseleave", function (event, d) {
                     d3.select(this).attr("fill", function (d) {
-                        var index = 0;
-                        for (var i = 0; i < info.length; i++) {
-                            if (info[i]["County"] == d.properties.name) {
-                                index = i;
-                                break;
-                            }
-                        }
+                        index = find_index(d, info);
                         return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                     })
                 });
