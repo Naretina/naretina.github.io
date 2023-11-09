@@ -19,22 +19,8 @@
             // Dummy numbers inspired from: https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/ohio/
             var info = await d3.json("specializedCovid.json");
 
-            // TO BE DELETED: What are the min & max of the percentage of people who died from Covid?
-            var min = info[0]["Deaths"]/info[0]["Cases"];
-            var max = info[0]["Deaths"]/info[0]["Cases"];
-            for (var i = 1; i < info.length; i++) {
-                var thisVar = info[i]["Deaths"]/info[i]["Cases"];
-                if (thisVar < min) {
-                    min = thisVar;
-                } else if (thisVar > max) {
-                    max = thisVar;
-                }
-            }
-            console.log(min);
-            console.log(max);
-
             //step 2: create the SVG 
-            /* var width = 600,
+            var width = 600,
                 height = 600;
 
             var svg = d3.select("#chart")
@@ -55,7 +41,7 @@
             //psuedo color mapping
             const colorScale = d3.scaleSequential()
                 .interpolator(d3.interpolateBlues)
-                .domain([0, 3000]);
+                .domain([0.00, 0.05]);
 
             // Draw the map
             var map = svg.append("g")
@@ -77,7 +63,7 @@
                             break;
                         }
                     }
-                    return colorScale(info[index]["Deaths"]);
+                    return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                 })
                 .on("mouseover", function (event, d) {
                     console.log(d.properties.name);
@@ -92,9 +78,9 @@
                                 break;
                             }
                         }
-                        return colorScale(info[index]["Deaths"]);
+                        return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                     })
-                });*/
+                });
 
         }
 
