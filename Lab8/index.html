@@ -35,18 +35,18 @@
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
             
             // Create the space for the additional information on County, Cases, and Deaths
-            const svg2 = d3.select("#chart").append("svg")
+            const svg2 = d3.select("#chart").append("svg").attr("id", "info")
                 .attr("width", 300).attr("height", height);
 
-            var countyText = svg2.append("text").attr("id", "countyBit")
+            var countyText = svg2.append("text")
                 .attr("text-anchor", "start")
                 .attr("x", 25).attr("y", 250)
                 .text("County:");
-            var casesText = svg2.append("text").attr("id", "casesBit")
+            var casesText = svg2.append("text")
                 .attr("text-anchor", "start")
                 .attr("x", 25).attr("y", 300)
                 .text("COVID Cases:");
-            var deathsText = svg2.append("text").attr("id", "deathsBit")
+            var deathsText = svg2.append("text")
                 .attr("text-anchor", "start")
                 .attr("x", 25).attr("y", 350)
                 .text("Deaths to COVID:");
@@ -89,6 +89,7 @@
                 })
                 .on("mouseover", function (event, d) {
                     console.log(d.properties.name);
+                    d3.select("#info").selectAll("text").remove();
                     var index = 0;
                     for (var i = 0; i < info.length; i++) {
                         if (info[i]["County"] == d.properties.name) {
@@ -96,9 +97,10 @@
                             break;
                         }
                     }
-                    d3.select("#countyBit").update().text("County: " + d.properties.name);
-                    d3.select("#casesBit").update().text("COVID Cases: " + info[index]["Cases"]);
-                    d3.select("#deathsBit").update().text("Deaths to COVID: " + info[index]["Deaths"]);
+                    // TODO: Fix this so that it updates.
+                    //d3.select("#countyBit").update().text("County: " + d.properties.name);
+                    //d3.select("#casesBit").update().text("COVID Cases: " + info[index]["Cases"]);
+                    //d3.select("#deathsBit").update().text("Deaths to COVID: " + info[index]["Deaths"]);
                     d3.select(this).attr("fill", '#f8f7cc');
                 })
                 .on("mouseleave", function (event, d) {
