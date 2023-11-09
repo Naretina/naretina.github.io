@@ -33,11 +33,11 @@
                 .attr("font-size", "24px")
                 .text("Percentage of Deaths to Identified COVID-19 Cases");
 
-            var countyText = svg.append("text").attr("text-anchor", "start")
-                .attr("x", 100).attr("y", 525).text("County:");
-            var casesText = svg.append("text").attr("text-anchor", "start")
+            var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
+                .attr("x", 100).attr("y", 550).text("County:");
+            var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                 .attr("x", 100).attr("y", 575).text("COVID Cases:");
-            var deathsText = svg.append("text").attr("text-anchor", "start")
+            var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                 .attr("x", 300).attr("y", 575).text("Deaths to COVID:");
 
             //step 3: create the geoPath() and specify the projection configurations
@@ -77,7 +77,7 @@
                     return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                 })
                 .on("mouseover", function (event, d) {
-                    d3.select("#info").selectAll("text").remove();
+                    d3.selectAll(".info").remove();
                     var index = 0;
                     for (var i = 0; i < info.length; i++) {
                         if (info[i]["County"] == d.properties.name) {
@@ -85,17 +85,17 @@
                             break;
                         }
                     }
-                    var countyText = svg.append("text").attr("text-anchor", "start")
-                        .attr("x", 100).attr("y", 525).text("County: " + d.properties.name);
-                    var casesText = svg.append("text").attr("text-anchor", "start")
+                    var countyText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
+                        .attr("x", 100).attr("y", 550).text("County: " + d.properties.name);
+                    var casesText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                         .attr("x", 100).attr("y", 575).text("COVID Cases: " + info[index]["Cases"]);
-                    var deathsText = svg.append("text").attr("text-anchor", "start")
+                    var deathsText = svg.append("text").attr("class", "info").attr("text-anchor", "start")
                         .attr("x", 300).attr("y", 575).text("Deaths to COVID: " + info[index]["Deaths"]);
                     d3.select(this).attr("fill", '#f8f7cc');
                 })
                 .on("mouseleave", function (event, d) {
                     d3.select(this).attr("fill", function (d) {
-                        d3.select("#info").selectAll("text").remove();
+                        d3.selectAll(".info").remove();
                         var index = 0;
                         for (var i = 0; i < info.length; i++) {
                             if (info[i]["County"] == d.properties.name) {
@@ -103,11 +103,14 @@
                                 break;
                             }
                         }
-                        var countyText = svg.append("text").attr("text-anchor", "start")
-                            .attr("x", 100).attr("y", 525).text("County:");
-                        var casesText = svg.append("text").attr("text-anchor", "start")
+                        var countyText = svg.append("text").attr("class", "info")
+                            .attr("text-anchor", "start")
+                            .attr("x", 100).attr("y", 550).text("County:");
+                        var casesText = svg.append("text").attr("class", "info")
+                            .attr("text-anchor", "start")
                             .attr("x", 100).attr("y", 575).text("COVID Cases:");
-                        var deathsText = svg.append("text").attr("text-anchor", "start")
+                        var deathsText = svg.append("text").attr("class", "info")
+                            .attr("text-anchor", "start")
                             .attr("x", 300).attr("y", 575).text("Deaths to COVID:");
                         return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                     })
