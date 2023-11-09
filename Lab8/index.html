@@ -10,11 +10,11 @@
 <!-- This data does NOT match what I did for tasks one and two at all. Treat them more as practice. -->
     <div id="chart" style="width: 800px; height: 600px;"></div>
     <script>
-        async function find_index(d, info) {
+        async function find_index(name, info) {
         // Referenced https://stackoverflow.com/questions/20005059/how-to-iterate-over-data-in-json-file-using-d3-javascript
             var index = 0;
             for (var i = 0; i < info.length; i++) {
-                if (info[i]["County"] == d.properties.name) {
+                if (info[i]["County"] == name) {
                     index = i;
                     break;
                 }
@@ -88,7 +88,7 @@
                 .style("stroke", "#aaa")
                 .attr("opacity", 0.7)
                 .attr("fill", function (d) {
-                    var index = find_index(d, info);
+                    var index = find_index(d.properties.name, info);
                     return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                 })
                 .on("mouseover", function (event, d) {
@@ -97,7 +97,7 @@
                 })
                 .on("mouseleave", function (event, d) {
                     d3.select(this).attr("fill", function (d) {
-                        var index = find_index(d, info);
+                        var index = find_index(d.properties.name, info);
                         return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
                     })
                 });
