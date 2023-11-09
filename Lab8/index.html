@@ -38,16 +38,16 @@
                 .attr("width", 200).attr("height", height);
 
             var countyText = svg2.append("text").attr("id", "infobit")
-                .attr("text-anchor", "end")
-                .attr("x", 50).attr("y", 200)
+                .attr("text-anchor", "start")
+                .attr("x", 50).attr("y", 250)
                 .text("County:");
             var casesText = svg2.append("text").attr("id", "infobit")
-                .attr("text-anchor", "end")
+                .attr("text-anchor", "start")
                 .attr("x", 50).attr("y", 300)
                 .text("COVID Cases:");
             var deathsText = svg2.append("text").attr("id", "infobit")
-                .attr("text-anchor", "end")
-                .attr("x", 50).attr("y", 400)
+                .attr("text-anchor", "start")
+                .attr("x", 50).attr("y", 350)
                 .text("Deaths to COVID:");
 
             //step 3: create the geoPath() and specify the projection configurations
