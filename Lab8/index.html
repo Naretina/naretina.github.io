@@ -9,7 +9,7 @@
 </head>
 <body>
 <!-- This data does NOT match what I did for tasks one and two at all. Treat them more as practice. -->
-    <div id="chart" style="width: 800px; height: 600px;"></div>
+    <div id="chart" style="width: 600px; height: 600px;"></div>
     <script>
 
         async function program() {
@@ -53,12 +53,12 @@
             //psuedo color mapping
             const colorScale = d3.scaleSequential()
                 .interpolator(d3.interpolateBlues)
-                .domain([0.005, 0.025]);
+                .domain([0.5, 2.5]);
 
             // Draw color scale
             const cLegend = svg.append("g").attr("id", "cLegend")
-					.attr("transform", "translate(15, 450)");
-            var colorLegend = Legend(colorScale, {title: "Percentage"});
+					.attr("transform", "translate(15, 475)");
+            var colorLegend = Legend(colorScale, {title: "Percentage (%)"});
 			document.getElementById("cLegend").appendChild(colorLegend).classList.add("Alegend");
 
             // Draw the map
@@ -81,7 +81,7 @@
                             break;
                         }
                     }
-                    return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
+                    return colorScale((info[index]["Deaths"]/info[index]["Cases"])*100);
                 })
                 .on("mouseover", function (event, d) {
                     d3.selectAll(".info").remove();
@@ -119,7 +119,7 @@
                         var deathsText = svg.append("text").attr("class", "info")
                             .attr("text-anchor", "start")
                             .attr("x", 300).attr("y", 575).text("Deaths to COVID:");
-                        return colorScale(info[index]["Deaths"]/info[index]["Cases"]);
+                        return colorScale((info[index]["Deaths"]/info[index]["Cases"])*100);
                     })
                 });
 
