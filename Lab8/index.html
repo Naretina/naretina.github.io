@@ -56,7 +56,7 @@
                 .domain([0.005, 0.025]);
 
             // Draw color scale
-            const cLegend = canvas.append("g").attr("id", "cLegend")
+            const cLegend = svg.append("g").attr("id", "cLegend")
 					.attr("transform", "translate(15, 450)");
             var colorLegend = Legend(color, {title: "Percentage"});
 			document.getElementById("cLegend").appendChild(colorLegend).classList.add("Alegend");
