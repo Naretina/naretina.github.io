@@ -28,6 +28,10 @@
                 .attr("width", width)
                 .attr("height", height);
 
+            var title = svg.append("text")
+                .attr("text-anchor", "end")
+                .attr("x", width).attr("y", height-6)
+                .text("Percentage of Deaths to Identified COVID-19 Cases");
 
             //step 3: create the geoPath() and specify the projection configurations
             var projection = d3.geoMercator()
